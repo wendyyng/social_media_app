@@ -1,0 +1,39 @@
+<div>Group Show Page</div>
+
+
+<div>
+    <h2><%= @group.title %></h2>
+    <p><%= @group.description %></p>
+</div>
+
+<div>
+    <h2>New Post</h2>
+        <%= form_with(model:[@group, @group_post]) do |f| %>
+         <div class="form-group">
+        <%= f.label :body %>
+        <br>
+        <%= f.text_area :body, cols: 50, rows: 5, class:"form-control" %>
+        <br>
+        </div>
+    <br>
+        <%= f.submit "Post", class:"btn btn-primary" %>
+    <br>
+    <% end %>
+</div>
+
+
+<div>Group Posts:</div>
+<div>
+    <% @group_posts.each do |group_post| %>
+    <div class="card m-2 p-2 d-flex justify-content-around align-items-center" style="width: 18rem;">
+        <p><%= group_post.body %></p>
+        <p>Posted by: <%= group_post.user.first_name %></p>
+        </hr>
+        <% group_post.comments.each do |comment|%>
+            <div class="card p-3 m-3">
+              <p>Comment: <%= comment.body %></p> 
+            </div>
+        <% end %>
+    </div>
+<% end %>
+</div>

@@ -66,10 +66,12 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    bcrypt (3.1.18)
     bindex (0.8.1)
     bootsnap (1.13.0)
       msgpack (~> 1.2)
     builder (3.2.4)
+    cancancan (3.4.0)
     concurrent-ruby (1.1.10)
     crass (1.0.6)
     debug (1.6.2)
@@ -77,6 +79,8 @@ GEM
       reline (>= 0.3.1)
     digest (3.1.0)
     erubi (1.11.0)
+    faker (2.22.0)
+      i18n (>= 1.8.11, < 2)
     globalid (1.0.0)
       activesupport (>= 5.0)
     i18n (1.12.0)
@@ -185,8 +189,11 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   bootsnap
+  cancancan (~> 3.4)
   debug
+  faker (~> 2.11)
   importmap-rails
   jbuilder
   pg (~> 1.1)

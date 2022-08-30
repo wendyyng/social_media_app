@@ -1,0 +1,11 @@
+<div>Group Index</div>
+
+<% @groups.each do |group| %>
+<div class="card m-2 p-2 d-flex justify-content-around align-items-center" style="width: 18rem;">
+    <img class="card-img-top p-2" src="https://picsum.photos/200" alt="Card image cap">
+      <h3 class="card-title fw-bold text-reset p-2" ><%= link_to group.title, group_path(group), style:"text-decoration: none; color: black" %></h3>
+         <p><%= group.description %></p>
+         <p>Created by: <%= group.user.first_name %></p>
+         <a class="btn btn-dark text-uppercase p-3" href="<%= group_path(group) %>">Enter Group</a>
+    </div>
+<% end %>
