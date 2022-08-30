@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   root "groups#index"
 
   resources :groups do
-    resources :group_posts
+    resources :group_posts do
+      resources :comments, only: [:new, :create, :destroy]
+    end
   end
   
   resources :users, only:[:create, :new, :show, :edit, :update]

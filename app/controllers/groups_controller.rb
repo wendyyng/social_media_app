@@ -6,7 +6,39 @@ class GroupsController < ApplicationController
     def show
         @group = Group.find params[:id]
         @group_post = GroupPost.new
+        @comment = Comment.new
+        @comment.group_post = @group_post
         @group_posts = @group.group_posts.order(created_at: :desc)
+    end
+
+    def new
+        @group = Group.new
+    end
+
+    def create
+        @group = Group.new(group_params)
+        @group.user = current_user
+        if @group.save
+          flash[:notice]= "Group created successfully!"
+          redirect_to group_path(@group.id), notice: "Created"
+        else
+          flash[:error] = "Invalid Group"
+          render :new
+        end
+    end
+
+    private
+
+    def authorize_user!
+     redirect_to root_path, alert: "Not authorized" unless can?(:crud, @product)
+    end
+
+    def find_group
+      @group = Group.find params[:id]
+    end
+
+    def group_params
+        params.require(:group).permit(:title, :description)
     end
 
 end

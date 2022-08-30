@@ -13,6 +13,70 @@
   </head>
 
   <body>
+    <div class="container-fluid mt-5 custombg">
+        <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid d-flex">
+      <a class="m-2" alt="" href=''>
+       <%= image_tag "https://i.picsum.photos/id/447/200/200.jpg?grayscale&hmac=DRqS_yApBEh_6rknbD1H-VT8vbIR-G8vVwKtTTarh-U", id: 'logo'%> 
+      </a>
+        <a class="navbar-brand fw-bold ml-5" href="<%= root_path %>">AmazingSilhouette</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse d-flex" id="navbarNavDropdown">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="<%= groups_path %>">Groups</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<%= new_group_path %>">New Group</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Misc
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+            <li><hr class="dropdown-divider"></li>
+
+              </ul>
+            </li>
+            <% if user_signed_in? %>
+              <li class="nav-item">
+                <a class="nav-link disabled">Hello <%= current_user.full_name %> </a>
+              </li>
+              <li class="nav-item">
+              <div><%= button_to "Log out", sessions_path, method: :delete, class: "btn btn-danger" %></div>
+              </li>
+              
+            <% else %>
+              <li class="nav-item">
+                <div class="nav-link">
+                  <a class="btn btn-light btn-sm" href="<%= new_sessions_path %>">Sign In</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <div class="nav-link">
+                  <a class="btn btn-light btn-sm" href="<%= new_user_path %>">Sign Up</a>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+          <%# <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form> %>
+        </div>
+      </div>
+    </nav>
+</div>
+   
+    <% flash.each do |type, message| %>
+      <div class="alert alert-info" role="alert">
+        <%= type + "------" + message %>
+      </div>
+    <% end %>
     <%= yield %>
      <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
