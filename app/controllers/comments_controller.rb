@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
         @comment.group_post = @group_post
         @comment.user = current_user
         if @comment.save
-            redirect_to group_path(@group), notice: "Comment created!"
+            redirect_to group_path(@group)
           else
             render '/groups/show'
           end

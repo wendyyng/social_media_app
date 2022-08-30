@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root "groups#index"
 
   resources :groups do
+    resources :memberships, shallow: true, only: [:create, :destroy]
     resources :group_posts do
       resources :comments, only: [:new, :create, :destroy]
     end

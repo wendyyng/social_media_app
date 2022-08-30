@@ -4,7 +4,32 @@
 <div>
     <h2><%= @group.title %></h2>
     <p><%= @group.description %></p>
+    <p>Admin: <%= @group.user.first_name %></p>
+     <small>
+    <% membership = current_user.memberships.find_by(group: @group) %>
+      <% if membership.present? %>
+         <%= button_to "Leave Group", membership_path(membership), method: :delete, class:"btn btn-danger text-uppercase p-3" %>
+         <% elsif user_signed_in? %>
+        <%= button_to "Join Group", group_memberships_path(@group), method: :post, class:"btn btn-dark text-uppercase p-3" %>
+     <% end%>
+    </small>
+
 </div>
+
+
+
+<div>
+    <h1>Members:</h1>
+    <% memberships = Membership.where(group: @group) %>
+    <% if memberships.present? %>
+        <% memberships.all.each do |membership| %>
+        <p><%= membership.user.first_name %> </p>
+        <% end %>
+
+    <% end %>
+</div>
+
+
 
 <div>
     <h2>New Post</h2>

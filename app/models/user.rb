@@ -6,8 +6,8 @@ class User < ApplicationRecord
 
     has_many :comments, dependent: :destroy
 
-    # has_many :memberships
-    # has_many :groups, through: :memberships
+    has_many :memberships
+    has_many :groups, through: :memberships
 
     def full_name
         if self.last_name
