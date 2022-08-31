@@ -37,7 +37,13 @@
          <div class="form-group">
         <%= f.label :body %>
         <br>
-        <%= f.text_area :body, cols: 50, rows: 5, class:"form-control" %>
+        <%= f.rich_text_area :body, cols: 50, rows: 5, class:"form-control" %>
+        <br>
+        </div>
+         <div class="form-group">
+        <%= f.label :image %>
+        <br>
+        <%= f.file_field :image, cols: 50, rows: 5, class:"form-control" %> 
         <br>
         </div>
     <br>
@@ -53,6 +59,9 @@
     <div class="card m-2 p-2 d-flex justify-content-around align-items-center" style="width: 18rem;">
         <p><%= group_post.body %></p>
         <p>Posted by: <%= group_post.user.first_name %></p>
+        <%   if group_post.image.attached? && group_post.image.content_type.in?(%w[image/jpeg image/png image/gif])%>
+             <%= link_to image_tag(group_post.image_as_thumbnail), group_post.image %>
+        <% end %>
         </hr>
 
 

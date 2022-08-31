@@ -5,7 +5,7 @@ class GroupPostsController < ApplicationController
 
     def create
         @group = Group.find params[:group_id]
-        @group_post = GroupPost.new(params.require(:group_post).permit(:body))
+        @group_post = GroupPost.new(params.require(:group_post).permit(:body, :image))
         @group_post.user = current_user
         @group_post.group = @group
         if @group_post.save
