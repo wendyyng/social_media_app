@@ -1,12 +1,8 @@
-<div>Group Index</div>
+<h1>Search</h1>
 
-  <%# <h1><%= link_to current_user.first_name, user_path(current_user.id), style:"text-decoration: none; color: black" %></h1> %>
-<%= link_to "Users", users_path %>
-<div>
-<h3 class="hover-2">Hover Me</h3>
+<%= render 'search/form' %>
 
-</div>
-
+    <h1 class="text-center my-5"><%= pluralize(@groups.count, "Result") %> with "<%=@keyword%>"</h1>
 <% @groups.each do |group| %>
 <div class="card m-2 p-2 d-flex justify-content-around align-items-center" style="width: 30rem;">
     <img class="card-img-top p-2" src="https://picsum.photos/200" alt="Card image cap">

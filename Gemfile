@@ -48,7 +48,7 @@ gem "bootsnap", require: false
 gem "faker", "~> 2.11"
 # gem 'pry', '~> 0.14.1'
 gem 'cancancan', '~> 3.4'
-gem 'button_link_to'
+gem "ransack", "~> 3.2"
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
@@ -69,4 +69,4 @@ group :development do
 end
 
 
-gem "ransack", "~> 3.2"
+

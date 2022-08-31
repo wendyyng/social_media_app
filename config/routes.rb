@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resources :users, only:[:create, :new, :show, :edit, :update, :index]
   resource :sessions, only: [:new, :create, :destroy]
   resources :friendships
-  get 'search/index', to: "search#index"
+
+  get 'search/', to: "search#index"
 
 end

@@ -13,3 +13,30 @@
  *= require_tree .
  *= require_self
  */
+
+ .hover-2 {
+    --h: 1.2em;   /* the height */
+    
+    line-height: var(--h);
+    color: #0000;
+    text-shadow: 
+      0 var(--_t,var(--h)) rgb(216, 108, 108),
+      0 0 var(--_c,#000);
+    transition: 0.3s;
+  }
+  .hover-2:hover {
+    --_t: 0;
+    --_c: #0000;
+  }
+
+  h3 {
+    font-family: system-ui, sans-serif;
+    font-size: 3rem;
+    margin:0;
+    cursor: pointer;
+    padding: 0 .1em;
+  }
+
+  body {
+    background: pink;
+  }
