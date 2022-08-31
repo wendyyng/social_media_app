@@ -17,9 +17,14 @@ class UsersController < ApplicationController
             render :new, status: 303
         end
     end
+
+    def index
+        @users = User.all.order(created_at: :desc)
+    end
     
     def show
         @user = User.find params[:id]
+        @allusers = User.all
     end
     
     private

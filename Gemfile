@@ -68,3 +68,5 @@ group :development do
   # gem "spring"
 end
 
+
+gem "ransack", "~> 3.2"

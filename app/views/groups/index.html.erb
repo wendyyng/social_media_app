@@ -1,7 +1,7 @@
 <div>Group Index</div>
 
-
-
+  <h1><%= link_to current_user.first_name, user_path(current_user.id), style:"text-decoration: none; color: black" %></h1>
+<%= link_to "Users", users_path %>
 
 <% @groups.each do |group| %>
 <div class="card m-2 p-2 d-flex justify-content-around align-items-center" style="width: 30rem;">

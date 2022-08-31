@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'search/index'
+  get 'friends/index'
+  get 'friends/destroy'
+  resources :friend_requests
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
@@ -13,6 +17,9 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :users, only:[:create, :new, :show, :edit, :update]
+  resources :users, only:[:create, :new, :show, :edit, :update, :index]
   resource :sessions, only: [:new, :create, :destroy]
+  resources :friendships
+  get 'search/index', to: "search#index"
+
 end

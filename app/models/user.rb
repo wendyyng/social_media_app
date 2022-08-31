@@ -9,6 +9,9 @@ class User < ApplicationRecord
     has_many :memberships
     has_many :groups, through: :memberships
 
+    has_many :friendships
+    has_many :friends, :through => :friendships
+
     def full_name
         if self.last_name
           self.first_name + " " + self.last_name
