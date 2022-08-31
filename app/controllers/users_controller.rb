@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     end
 
     def create
-        @user = User.new params.require(:user).permit(:username, :email, :password, :password_confirmation)
+        @user = User.new params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :image)
 
         if @user.save
             session[:user_id] = @user.id
@@ -24,9 +24,24 @@ class UsersController < ApplicationController
     
     def show
         @user = User.find params[:id]
-        @allusers = User.all
     end
-    
+
+    def user_panel
+        @user = current_user
+    end
+
+    def edit
+
+    end
+
+    def update
+        if @user.update(params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :image))
+            redirect_to show_user_panel(@user)
+          else
+            render :edit
+          end
+    end
+
     private
 
     def authorize_user!

@@ -1,20 +1,21 @@
 class FriendshipsController < ApplicationController
-    def create
-        @friendship = current_user.friendships.build(:friend_id => params[:friend_id])
-        if @friendship.save
-          flash[:notice] = "Added friend."
-          redirect_to root_url
-        else
-          flash[:error] = "Error occurred!!"
-          redirect_to root_url
-        end
+  protect_from_forgery with: :exception
+  def create
+    #is this bulk addition or individual addition?
+      if params.include?(:friend_id) #individual e.g. "Add friend" link
+      @new_friendships = Friendship.create_reciprocal_for_ids(current_user_id, params[:friend_id])
+    else
+      params[:user][:friend_ids].each do |f_id|
+      @new_friendships = Friendship.create_reciprocal_for_ids(current_user_id, f_id)
       end
-      
-    def destroy
-     @friendship = current_user.friendships.where(friend_id: user.id)
-     @friendship.destroy
-     flash[:notice] = "Unfriended Successfully."
-     redirect_to root_url
     end
+    
+    redirect_to root_path
+  end
+
+  def destroy
+      Friendship.destroy_reciprocal_for_ids(current_user_id, params[:friend_id])
+      redirect_to(request.referer)
+  end
 
 end

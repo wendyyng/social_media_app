@@ -13,3 +13,17 @@
  *= require_tree .
  *= require_self
  */
+ @import 'trix/dist/trix.css'
+
+ 
+  h3 {
+    font-family: system-ui, sans-serif;
+    font-size: 3rem;
+    margin:0;
+    cursor: pointer;
+    padding: 0 .1em;
+  }
+
+  body {
+    background: pink;
+  }

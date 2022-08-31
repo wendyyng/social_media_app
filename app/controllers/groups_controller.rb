@@ -9,6 +9,9 @@ class GroupsController < ApplicationController
         @comment = Comment.new
         @comment.group_post = @group_post
         @group_posts = @group.group_posts.order(created_at: :desc)
+        if current_user
+          @membership = current_user.memberships.find_by(group: @group) 
+        end
     end
 
     def new

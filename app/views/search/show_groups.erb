@@ -1,6 +1,6 @@
 <h1>Search</h1>
 
-<%# <%= render 'search/form' %> %>
+<%= render 'search/form' %>
 
     <h1 class="text-center my-5"><%= pluralize(@groups.count, "Result") %> with "<%=@keyword%>"</h1>
 <% @groups.each do |group| %>
