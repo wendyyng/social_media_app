@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-    before_action :authenticate_user!, only: [:admin_panel, :edit, :update]
-    before_action :authorize_user!, only: [:admin_panel, :edit]
+    before_action :authenticate_user!, only: [:user_panel, :edit, :update]
+    before_action :authorize_user!, only: [:user_panel, :edit]
     
     def new
         @user = User.new
@@ -24,6 +24,7 @@ class UsersController < ApplicationController
     
     def show
         @user = User.find params[:id]
+
     end
 
     def user_panel

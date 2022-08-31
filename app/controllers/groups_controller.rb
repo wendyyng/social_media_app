@@ -7,6 +7,7 @@ class GroupsController < ApplicationController
         @group = Group.find params[:id]
         @group_post = GroupPost.new
         @comment = Comment.new
+        @members = Membership.where(group: @group)
         @comment.group_post = @group_post
         @group_posts = @group.group_posts.order(created_at: :desc)
         if current_user

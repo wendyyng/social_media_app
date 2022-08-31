@@ -3,8 +3,12 @@ class InvitationsController < ApplicationController
       id1 = params[:ids][:id1]
       id2 = params[:ids][:id2]
       @invitation = Invitation.new(user_id: id1, friend_id: id2)
-      @invitation.save
-      redirect_to users_path
+      if @invitation.save
+        flash[:notice]= "Invitation sent successfully!"
+        redirect_to users_path
+      else
+        flash[:error] = "Error!"
+      end
     end
   
     def destroy
@@ -19,4 +23,5 @@ class InvitationsController < ApplicationController
       invitation.update(confirmed: true)
       redirect_to user_path(invitation.friend_id)
     end
+    
   end

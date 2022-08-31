@@ -7,7 +7,7 @@
     <p>Admin: <%= @group.user.first_name %></p>
      <small>
       <% if @membership.present? %>
-         <%= button_to "Leave Group", membership_path(membership), method: :delete, class:"ui red button btn btn-danger text-uppercase p-3" %>
+         <%= button_to "Leave Group", membership_path(@membership), method: :delete, class:"ui red button btn btn-danger text-uppercase p-3" %>
          <% elsif user_signed_in? %>
         <%= button_to "Join Group", group_memberships_path(@group), method: :post, class:"btn btn-dark text-uppercase p-3" %>
      <% end%>
@@ -19,18 +19,18 @@
 
 <div>
     <h1>Members:</h1>
-    <% memberships = Membership.where(group: @group) %>
-    <% if memberships.present? %>
-        <% memberships.all.each do |membership| %>
-        <p><%= membership.user.first_name %> </p>
+    <% if @members.present? %>
+        <% @members.each do |member| %>
+        <div><%= member.user.full_name %> </div>
+<button class="ui basic button"><i class="icon user"></i><%= link_to "Profile", user_path(member), style:"text-decoration: none; color: black" %></td>
         <% end %>
 
     <% end %>
 </div>
 
+<% if @membership.present? %>
 
-
-<div>
+<div class="container">
     <h2>New Post</h2>
         <%= form_with(model:[@group, @group_post]) do |f| %>
          <div class="form-group">
@@ -46,9 +46,6 @@
          <%= content_tag(:i, nil, id: 'audio-record-button', class:'bi bi-mic microphone-icon') %>
         <br>
         </div>
-
-       
-
     <br>
         <%= f.submit "Post", class:"btn btn-primary" %>
     <br>
@@ -56,10 +53,10 @@
 </div>
 
 
+<div class="container">
 <div>Group Posts:</div>
-<div>
     <% @group_posts.each do |group_post| %>
-    <div class="card m-2 p-2 d-flex justify-content-around align-items-center" style="width: 18rem;">
+    <div class="card m-2 p-2 d-flex justify-content-around align-items-center" style="width: 40rem;">
         <p><%= group_post.body %></p>
         <p>Posted by: <%= group_post.user.first_name %></p>
         <%   if group_post.image.attached? && group_post.image.content_type.in?(%w[image/jpeg image/png image/gif])%>
@@ -86,11 +83,24 @@
 
 
         <% group_post.comments.each do |comment|%>
+            <% if comment.user == current_user %>
+                <div class="card p-3 m-3"  style="background-color: yellow;">
+              <p><%= comment.user.first_name%>    says: <%= comment.body %></p> 
+            </div>
+            <% else %>
             <div class="card p-3 m-3">
               <p><%= comment.user.first_name%>    says: <%= comment.body %></p> 
             </div>
+
+            <% end %>
+       
+       
+       
         <% end %>
         </hr>
     </div>
 <% end %>
 </div>
+
+
+<% end%>
