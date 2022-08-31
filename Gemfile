@@ -49,6 +49,8 @@ gem "faker", "~> 2.11"
 # gem 'pry', '~> 0.14.1'
 gem 'cancancan', '~> 3.4'
 gem "ransack", "~> 3.2"
+gem 'popular'
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
 

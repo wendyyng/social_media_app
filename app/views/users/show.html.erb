@@ -12,17 +12,41 @@
 
 <div>
     <h1>About me: </h1>
-    <button class="ui basic button"><i class="icon user"></i><%= link_to "Profile", user_path(@user), style:"text-decoration: none; color: black" %></button>
-    <%= button_to "Add Friend", user_path(@user), method: :post, class:"ui active button" %>
+    
+    
+
+        <%= link_to 'Add Friend',invitations_create_path(ids: {id1: current_user.id, id2: @user.id}), method: :post, class:"ui active button" %>
+     
 </div>
 
 
 <div>
-<h1>Friends: </h1>
-<% @user.friendships.each do |f| %>
-  
-    <% friend = @allusers.find_by(id: f.friend_id) %>
-    <p><%= friend.full_name %></p>
-<% end %>
 
-</div>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.full_name %>
+</p>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
+
+
+<h3>Friends of <strong> <%= @user.full_name %> </strong> </h3>
+
+<ol>
+  <% @user.friends.each do |friend| %>
+    <li>
+      <%= friend.full_name %>
+      <% if @user == current_user %>
+        <%= link_to 'Unfriend',
+        invitations_destroy_path(invitation_id: Invitation.find_invitation(@user.id, friend.id))  %>
+      <% end %>
+    </li>
+  <% end %>
+</ol>
+
+
+

@@ -1,0 +1,17 @@
+
+
+<%= link_to 'Update Your Profile', edit_user_path(@user) %>
+
+<h3> Your pending friend requests:</h3>
+<ol>
+  <% @user.pending_invitations.each do |invitation| %>
+    <li>
+      <%= User.find(invitation.user_id).full_name %>
+      <%= link_to 'Accept Invitation',
+      invitations_update_path(invitation_id: invitation.id) %>
+      <%= link_to 'Reject Invitation',
+      invitations_destroy_path(invitation_id: invitation.id) %>
+    </li>
+  <% end %>
+</ol>
+

@@ -6,8 +6,7 @@
     <p><%= @group.description %></p>
     <p>Admin: <%= @group.user.first_name %></p>
      <small>
-    <% membership = current_user.memberships.find_by(group: @group) %>
-      <% if membership.present? %>
+      <% if @membership.present? %>
          <%= button_to "Leave Group", membership_path(membership), method: :delete, class:"ui red button btn btn-danger text-uppercase p-3" %>
          <% elsif user_signed_in? %>
         <%= button_to "Join Group", group_memberships_path(@group), method: :post, class:"btn btn-dark text-uppercase p-3" %>
