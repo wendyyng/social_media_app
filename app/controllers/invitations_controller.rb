@@ -15,6 +15,7 @@ class InvitationsController < ApplicationController
       invitation = Invitation.find(params[:invitation_id])
       invitation.destroy
       redirect_to user_path(current_user.id)
+      # flash[:notice]= "Unsent successfully!"
     end
   
     def update
@@ -22,6 +23,12 @@ class InvitationsController < ApplicationController
       p current_user
       invitation.update(confirmed: true)
       redirect_to user_path(invitation.friend_id)
+    end
+
+    def unsent
+      invitation = Invitation.find(params[:invitation_id])
+      invitation.destroy
+      redirect_to show_user_panel_path(current_user.id)
     end
     
   end

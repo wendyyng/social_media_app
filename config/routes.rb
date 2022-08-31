@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  get 'search/index'
-  get 'friends/index'
-  get 'friends/destroy'
+  # get 'search/index'
+  # get 'friends/index'
+  # get 'friends/destroy'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -23,9 +23,11 @@ Rails.application.routes.draw do
 
   get 'search/', to: "search#index"
 
+
   get 'invitations/update'
   get 'invitations/create'
   get 'invitations/destroy'
+  get 'invitations/unsent'
 
   get 'userpanel', to: 'users#user_panel', as: :show_user_panel
 

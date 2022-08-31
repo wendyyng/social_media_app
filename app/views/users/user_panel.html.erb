@@ -2,16 +2,30 @@
 
 <%= link_to 'Update Your Profile', edit_user_path(current_user) %>
 
-<h3> Your pending friend requests:</h3>
+<h3>New friend requests:</h3>
 <ol>
-  <% @user.pending_invitations.each do |invitation| %>
+  <% @received_requests.each do |invitation| %>
     <li>
       <%= User.find(invitation.user_id).full_name %>
       <%= link_to 'Accept Invitation',
       invitations_update_path(invitation_id: invitation.id) %>
       <%= link_to 'Reject Invitation',
-      invitations_destroy_path(invitation_id: invitation.id) %>
+      invitations_unsent_path(invitation_id: invitation.id) %>
     </li>
   <% end %>
 </ol>
+
+<h1>Pending sent friend requests:</h1>
+
+<% @sent_requests.each do |invitation|%>
+  <p><%= User.find(invitation.friend_id).full_name %></p>
+  <%= link_to 'Unsend Invitation', invitations_unsent_path(invitation_id: invitation.id) %>
+<% end %>
+
+
+
+<h1>Your Groups: </h1>
+<% current_user.groups.each do |group |%>
+    <p><%= group.title %></p>
+<% end %>
 

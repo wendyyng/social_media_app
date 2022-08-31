@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-    before_action :authenticate_user!, only: [:user_panel, :edit, :update]
-    before_action :authorize_user!, only: [:user_panel, :edit]
+    before_action :authenticate_user!, only: [:edit, :update]
+    before_action :authorize_user!, only: [:edit]
     
     def new
         @user = User.new
@@ -28,7 +28,8 @@ class UsersController < ApplicationController
     end
 
     def user_panel
-        @user = current_user
+      @received_requests = current_user.pending_invitations
+      @sent_requests = current_user.invitations
     end
 
     def edit
