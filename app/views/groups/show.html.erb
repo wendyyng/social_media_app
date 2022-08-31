@@ -43,9 +43,13 @@
          <div class="form-group">
         <%= f.label :image %>
         <br>
-        <%= f.file_field :image, cols: 50, rows: 5, class:"form-control" %> 
+        <%= f.file_field :image, class:"form-control" %> 
+         <%= content_tag(:i, nil, id: 'audio-record-button', class:'bi bi-mic microphone-icon') %>
         <br>
         </div>
+
+       
+
     <br>
         <%= f.submit "Post", class:"btn btn-primary" %>
     <br>
@@ -84,7 +88,7 @@
 
         <% group_post.comments.each do |comment|%>
             <div class="card p-3 m-3">
-              <p>Comment: <%= comment.body %></p> 
+              <p><%= comment.user.first_name%>    says: <%= comment.body %></p> 
             </div>
         <% end %>
         </hr>

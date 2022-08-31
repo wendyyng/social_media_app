@@ -1,6 +1,6 @@
 <%= search_form_for(@query, url: search_path, method: :get, class:"form-inline my-2 my-lg-0 d-flex flex-row") do |f| %>
     
-    <%= f.search_field :title_or_description_cont, 
+    <%= f.search_field :title_or_description_or_user_first_name_cont, 
             placeholder: "Search",
             class: "form-control mr-sm-2 mx-2",
             width: "15em" %>

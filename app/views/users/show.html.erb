@@ -2,7 +2,11 @@
 
 <p>Name: <%= @user.first_name %><p>
 
-<h1><%= link_to @user.full_name, user_path(@user), style:"text-decoration: none; color: black" %></h1>
+  <%   if @user.image.attached? && @user.image.content_type.in?(%w[image/jpeg image/png image/gif])%>
+             <%= link_to image_tag(@user.image_as_thumbnail), @user.image %>
+        <% end %>
+
+<h1><%= link_to @user.first_name, user_path(@user), style:"text-decoration: none; color: black" %></h1>
 
 <p>Email: <%=@user.email%></p>
 
