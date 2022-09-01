@@ -9,8 +9,8 @@ class User < ApplicationRecord
     has_many :memberships
     has_many :groups, through: :memberships
 
-    # has_many :friendships, dependent: :destroy  
-    # has_many :friends, through: :friendships
+    has_many :likes, dependent: :destroy
+    has_many :liked_group_posts, through: :likes, source: :group_post
 
     has_one_attached :image
 

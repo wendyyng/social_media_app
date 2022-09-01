@@ -8,12 +8,13 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  root "groups#index"
+  root "welcome#index"
 
   resources :groups do
     resources :memberships, shallow: true, only: [:create, :destroy]
     resources :group_posts do
       resources :comments, only: [:new, :create, :destroy]
+      resources :likes, shallow: true, only: [:create, :destroy]
     end
   end
   

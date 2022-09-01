@@ -106,11 +106,12 @@
 </div>
 
     <% flash.each do |type, message| %>
-
-      <div class="ui floating message" role="alert">
-        <%= type + "------" + message %>
+      <div class="d-flex flex-row-reverse">
+      <div class="ui floating message m-4" role="alert">
+      <i class="bell icon"></i>
+       <%= type.capitalize() + ": " + message %> 
       </div>
-
+    </div>
     <% end %> 
    
 

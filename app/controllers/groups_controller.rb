@@ -1,10 +1,13 @@
 class GroupsController < ApplicationController
+  before_action :find_group, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_user!, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:show, :index]
     def index
         @groups = Group.order(created_at: :desc)
     end
 
     def show
-        @group = Group.find params[:id]
+        
         @group_post = GroupPost.new
         @comment = Comment.new
         @members = Membership.where(group: @group)
