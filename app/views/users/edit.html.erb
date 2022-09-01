@@ -10,6 +10,7 @@
             <div class="card-body px-5 pt-5">
                 <h2 class="text-uppercase text-center mb-5">Update your account</h2>
                     <div class="form-outline mb-4">
+
                         <%= form_with(model: @user) do |f| %>
                             <div class="form-outline mb-4">
                                 <%= f.label :first_name, class: "form-label"%>
@@ -28,9 +29,11 @@
                                 <%= f.text_field :profile_img_url, class: "form-control form-control-lg"%>
                             </div>
                             <div class="d-flex justify-content-center mt-4">
-                            <%= f.submit 'Update', class:"btn btn-outline-dark my-2 my-sm-0"%>
+                            <%= f.submit 'Update', class:"ui primary button my-2 my-sm-0"%>
                             </div>
                         <% end %>
+
+
                     </div>
              
 

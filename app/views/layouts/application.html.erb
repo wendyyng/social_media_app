@@ -28,6 +28,33 @@
         </button>
 
 
+
+
+            <% if user_signed_in? %>
+              <% if current_user.pending_invitations %>
+      
+
+
+              <div class="ui compact menu">
+
+                  <a class="item">
+                    <i class="icon mail"></i>
+                    <div class="floating ui red label">22</div>
+                  </a>
+
+                  <a class="item">
+                    <i class="icon user"></i>
+                    <%if current_user.pending_invitations.count > 0 %>
+                    <div class="floating ui red label"><%=current_user.pending_invitations.count%></div>
+                    <% else %>
+                    <div class="floating ui"></div>
+                    <% end %>
+                  </a>
+                </div>
+
+
+              <% end %>
+
       <%# Search bar %>
             <div class="container mr-5" style="width: 25em">
               <%= render 'search/form' %>
@@ -52,7 +79,7 @@
 
               </ul>
             </li>
-            <% if user_signed_in? %>
+
               <li class="nav-item">
                 <a class="nav-link disabled">Hello <%= current_user.full_name %> </a>
               </li>
@@ -73,20 +100,19 @@
               </li>
             <% end %>
           </ul>
-          <%# <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form> %>
         </div>
       </div>
     </nav>
 </div>
-   
+
     <% flash.each do |type, message| %>
-      <div class="alert alert-info" role="alert">
+
+      <div class="ui floating message" role="alert">
         <%= type + "------" + message %>
       </div>
-    <% end %>
+
+    <% end %> 
+   
 
 
     <%= yield %>

@@ -1,23 +1,13 @@
-<div>Group Show Page</div>
-
-
-<div>
-    <h2><%= @group.title %></h2>
-    <p><%= @group.description %></p>
-    <p>Admin: <%= @group.user.first_name %></p>
-     <small>
-      <% if @membership.present? %>
-         <%= button_to "Leave Group", membership_path(@membership), method: :delete, class:"ui red button btn btn-danger text-uppercase p-3" %>
-         <% elsif user_signed_in? %>
-        <%= button_to "Join Group", group_memberships_path(@group), method: :post, class:"btn btn-dark text-uppercase p-3" %>
-     <% end%>
-    </small>
-
-</div>
+<div class="row ">
+  <div class="col-12 col-sm-6 col-md-8">
+  <div class="container">
 
 
 
-<div>
+
+
+<div class="container" >
+<div class="card container card shadow p-3 mb-5 bg-white rounded" style="width: 40rem;">
     <h1>Members:</h1>
     <% if @members.present? %>
         <% @members.each do |member| %>
@@ -27,10 +17,14 @@
 
     <% end %>
 </div>
+</div>
+
+
+
 
 <% if @membership.present? %>
-
 <div class="container">
+<div class="container card shadow p-3 mb-5 bg-white rounded" style="width: 40rem;">
     <h2>New Post</h2>
         <%= form_with(model:[@group, @group_post]) do |f| %>
          <div class="form-group">
@@ -47,60 +41,116 @@
         <br>
         </div>
     <br>
-        <%= f.submit "Post", class:"btn btn-primary" %>
+        <%= f.submit "Post", class:"ui primary button" %>
     <br>
     <% end %>
 </div>
+</div>
 
 
-<div class="container">
-<div>Group Posts:</div>
+    <div class="container">
     <% @group_posts.each do |group_post| %>
-    <div class="card m-2 p-2 d-flex justify-content-around align-items-center" style="width: 40rem;">
-        <p><%= group_post.body %></p>
-        <p>Posted by: <%= group_post.user.first_name %></p>
+    <div class="card m-2 p-2 d-flex justify-content-around shadow p-3 mb-5 bg-white rounded" style="width: 40rem;">
+        <div class="ui comments">
+        <div class="comment">
+                <a class="avatar">
+                <img src="https://i.pravatar.cc/">
+                </a>
+                <div class="content">
+                <a class="author"><%= group_post.user.full_name%></a>
+                <div class="metadata">
+                    <span class="date"><%= time_ago_in_words(group_post.created_at) %> ago</span>
+                </div>
+                </div>
+        </div>
+        </div>
+        <div><%= group_post.body %></div>
         <%   if group_post.image.attached? && group_post.image.content_type.in?(%w[image/jpeg image/png image/gif])%>
              <%= link_to image_tag(group_post.image_as_thumbnail), group_post.image %>
         <% end %>
+       <br>
+        <span><i class="thumbs up outline icon"></i></span>
         </hr>
+        </hr>
+       
 
 
         <div>
-            <p>New Comment</p>
+            
              <%= form_with(model:[@group, group_post, @comment]) do |f| %>
             <div class="form-group">
-             <%= f.label :body %>
+             <%= f.label :Comment %>
              <br>
-             <%= f.text_area :body, cols: 50, rows: 2, class:"form-control" %>
+             <%= f.text_area :body, cols: 50, rows: 1, class:"form-control" %>
               <br>
              </div>
-             <br>
-          <%= f.submit "Post", class:"btn btn-primary" %>
-    <br>
-    <% end %>
-            
-        </div>
+          <%= f.submit "Comment", class:"ui primary button" %>
 
+            <div class="ui comments">
+               
+    <%# Comment Section starts%>
+        <% if group_post.comments.any? %>
+            <h3 class="ui dividing header">Comments</h3>
+             <% group_post.comments.each do |comment|%>
 
-        <% group_post.comments.each do |comment|%>
-            <% if comment.user == current_user %>
-                <div class="card p-3 m-3"  style="background-color: yellow;">
-              <p><%= comment.user.first_name%>    says: <%= comment.body %></p> 
+            <div class="comment">
+                <a class="avatar">
+                <img src="https://i.pravatar.cc/">
+                </a>
+                <div class="content">
+                <a class="author"><%= comment.user.full_name%></a>
+                <div class="metadata">
+                    <span class="date"><%= time_ago_in_words(comment.created_at) %> ago</span>
+                </div>
+                <div class="text">
+                    <%= comment.body %>
+                </div>
+                </div>
             </div>
-            <% else %>
-            <div class="card p-3 m-3">
-              <p><%= comment.user.first_name%>    says: <%= comment.body %></p> 
-            </div>
-
             <% end %>
-       
-       
-       
         <% end %>
-        </hr>
+    <%# Comment Section ends %>
+
+
+
+</div>
+    <% end %>
+        </div>
     </div>
 <% end %>
 </div>
 
 
 <% end%>
+
+</div>
+
+
+
+  </div>
+
+
+  
+  <div class="col-2 col-md-4">
+  <div class="container card m-4 shadow p-3 mb-5 bg-white rounded">
+    <h2><%= @group.title %></h2>
+    <p><%= @group.description %></p>
+    <p>Admin: <%= @group.user.first_name %></p>
+    <span><i class="map pin icon"></i>Vancouver BC, Canada</span>
+    <br>
+     <small>
+      <% if @membership.present? %>
+         <%= button_to "Leave Group", membership_path(@membership), method: :delete, class:"ui red button btn btn-danger text-uppercase p-3" %>
+         <% elsif user_signed_in? %>
+        <%= button_to "Join Group", group_memberships_path(@group), method: :post, class:"btn btn-dark text-uppercase p-3" %>
+     <% end%>
+    </small>
+
+</div>
+  </div>
+</div>
+
+
+
+
+
