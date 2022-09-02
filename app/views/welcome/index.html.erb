@@ -5,8 +5,9 @@
         
         <h1 id="hero-main-text" class="text-dark mb-4">Join groups and connect with new friends!</h1>
         <p id="hero-secondary-text" class="text-dark m-2"><%= @group_count %> groups have been created and <%= @user_count %> people have already joined FriendMe<i class="child icon"></i></p>
+        <% if !user_signed_in? %>
         <a class="ui button secondary mt-2" href="<%= new_user_path %>">Sign Up Now!</a>
-        
+        <% end %>
     </section>
 
     </div>

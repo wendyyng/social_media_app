@@ -10,6 +10,8 @@
     <%= javascript_importmap_tags %>
       <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <!--Semantic UI -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
@@ -80,7 +82,7 @@ footer {
             <div class="container mr-5" style="width: 25em">
               <%= render 'search/form' %>
             </div>
-              <ul class="navbar-nav d-flex flex-row align-items-baseline" style="width: 30em">
+              <ul class="navbar-nav d-flex flex-end" style="width: 30em">
               
                 <% if user_signed_in? %>
                 <li class="nav-item m-1">
@@ -116,9 +118,6 @@ footer {
               </li>
                 <% else %>
                 <%# Sign In & Sign Up %>
-                <li class="nav-item m-1">
-                  <a class="nav-link text-dark " href="<%= groups_path %>">Groups</a>
-                </li>
                 <li class="nav-item">
                     <a class="btn btn-link nav-link text-dark " href="<%= new_sessions_path %>">Sign In</a>
                 </li>
@@ -132,14 +131,15 @@ footer {
         </nav>
       </div>
 
+      <div class="d-flex flex-row-reverse ">
     <% flash.each do |type, message| %>
-      <div class="d-flex flex-row-reverse">
-      <div class="ui floating message m-4" role="alert">
+      <div class="ui floating message alert alert-success alert-dismissible" role="alert">
       <i class="bell icon"></i>
        <%= type.capitalize() + ": " + message %> 
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
       </div>
-    </div>
     <% end %> 
+    </div>
    
 
 
