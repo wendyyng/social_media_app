@@ -1,40 +1,71 @@
+<div class="container ">
+<div class="ui link cards flex justify-content-center align-items-center">
 
-
-<p id="notice"><%= notice %></p>
-
-<h1>Users</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
     <% @users.each do |user| %>
-      <tr>
-        <td><%= user.full_name %></td>
-       <td> <button class="ui basic button"><i class="icon user"></i><%= link_to "Profile", user_path(user), style:"text-decoration: none; color: black" %></button></td>
-
-        <% if current_user && !Invitation.reacted?(current_user.id, user.id) && current_user != user %>
-        <td> 
-          <%= link_to 'Add Friend',
-            invitations_create_path(ids: {id1: current_user.id, id2: user.id}), method: :post, class:"ui active button" %>
-        </td>
-        <% end %>
-                <% if current_user = user || current_user.is_admin %>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
+    
+       
+       
 
 
-      </tr>
+              <div class="card">
+            <div class="image">
+              <img src="https://semantic-ui.com/images/avatar2/large/elyse.png">
+            </div>
+            <div class="content">
+              <div class="header"><%= link_to user.full_name, user_path(user), style:"text-decoration: none; color: black" %></div>
+              <%# <div class="meta">
+                <a>Friends</a>
+              </div> %>
+            </div>
+            <div class="extra content">
+              <span class="right floated">
+                <%= user.created_at.strftime("Joined in %B %Y") %>
+              </span>
+              <% if user.friends.count > 0 %>
+              <span>
+                <i class="user icon"></i>
+                 <%= user.friends.count %>
+                  <%= "Friend".pluralize(user.friends.count) %> 
+              </span>
+              <% end %>
+            </div>
+
+
+
+            <% if current_user && !Invitation.reacted?(current_user.id, user.id) && current_user != user %>
+            <div class="ui bottom attached button">
+            <i class="add icon"></i>
+            <%= link_to 'Add Friend',
+            invitations_create_path(ids: {id1: current_user.id, id2: user.id}), method: :post, class:"text-black" %>
+          </div>
+           <% end %>
+
+
+
+          <% if current_user.is_admin %>
+            <div class="ui bottom attached button">
+           
+            
+            <%= link_to 'Edit', edit_user_path(user), class:"text-black" %>
+          </div>
+    
+
+
+
+          <% end %>
+          </div>
+
+    
     <% end %>
-  </tbody>
-</table>
+
+ </div>
+
+
+
+
+
+
 
 <br>
 
-<%= link_to 'New User', new_user_path %>
+</div>

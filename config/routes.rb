@@ -18,9 +18,10 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :users, only:[:create, :new, :show, :edit, :update, :index]
+  resources :users, only:[:create, :new, :show, :edit, :update, :index, :destroy]
   resource :sessions, only: [:new, :create, :destroy]
 
+  resources :events
 
   get 'search/', to: "search#index"
 
@@ -28,6 +29,7 @@ Rails.application.routes.draw do
   get 'invitations/update'
   get 'invitations/create'
   get 'invitations/destroy'
+  get 'invitations/destroy_from_panel'
   get 'invitations/unsent'
 
   get 'userpanel', to: 'users#user_panel', as: :show_user_panel

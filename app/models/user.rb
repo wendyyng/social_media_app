@@ -14,8 +14,10 @@ class User < ApplicationRecord
 
     has_one_attached :image
 
-      has_many :invitations
-      has_many :pending_invitations, -> { where confirmed: false }, class_name: 'Invitation', foreign_key: "friend_id"
+    has_many :created_events, class_name: "Event", foreign_key: "organizer_id", dependent: :destroy
+
+    has_many :invitations
+    has_many :pending_invitations, -> { where confirmed: false }, class_name: 'Invitation', foreign_key: "friend_id"
 
     def friends
       friends_i_sent_invitation = Invitation.where(user_id: id, confirmed: true).pluck(:friend_id)

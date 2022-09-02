@@ -1,0 +1,81 @@
+ <div class="container-fluid mt-5 custombg">
+        <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid d-flex">
+      
+        <a class="navbar-brand fw-bold ml-5" href="<%= root_path %>">FriendMe</a>
+ 
+
+            <% if user_signed_in? %>
+              <% if current_user.pending_invitations %>
+              <div class="ui compact menu">
+
+                  <a class="item">
+                    <i class="icon mail"></i>
+                    <div class="floating ui red label">22</div>
+                  </a>
+
+                  <a class="item" href="show_user_panel_path">
+                  
+                    <i class="icon user"></i>
+                    <%if current_user.pending_invitations.count > 0 %>
+                    <div class="floating ui red label"><%=current_user.pending_invitations.count%></div>
+                    <% else %>
+                    <div class="floating ui"></div>
+                    <% end %>
+                  </a>
+                </div>
+              <% end %>
+
+
+
+      <%# Search bar %>
+            <div class="container mr-5" style="width: 25em">
+              <%= render 'search/form' %>
+            </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <ul class="navbar-nav d-flex flex-row align-items-baseline" style="width: 20em">
+        <div class="collapse navbar-collapse d-flex" id="navbarNavDropdown">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="<%= groups_path %>">Groups</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<%= new_group_path %>">New Group</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Misc
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+            <li><hr class="dropdown-divider"></li>
+
+              </ul>
+            </li>
+
+              <li class="nav-item">
+                <a class="nav-link disabled">Hello <%= current_user.full_name %> </a>
+              </li>
+              <li class="nav-item">
+              <div><%= button_to "Log out", sessions_path, method: :delete, class: "btn btn-danger" %></div>
+              </li>
+              
+            <% else %>
+              <li class="nav-item">
+                <div class="nav-link">
+                  <a class="btn btn-light btn-sm" href="<%= new_sessions_path %>">Sign In</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <div class="nav-link">
+                  <a class="btn btn-light btn-sm" href="<%= new_user_path %>">Sign Up</a>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</div>

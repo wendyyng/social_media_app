@@ -1,4 +1,5 @@
 class GroupPostsController < ApplicationController
+    before_action :authenticate_user!
     def new
         @group_post = GroupPost.new
     end
@@ -9,8 +10,7 @@ class GroupPostsController < ApplicationController
         @group_post.user = current_user
         @group_post.group = @group
         if @group_post.save
-            redirect_to group_path(@group)
-            # , notice: "Post created"
+            redirect_to group_path(@group), notice: "Post created"
         else
             @group_posts = @group.group_posts.order(created_at: :desc)
             render '/groups/show', status: 303

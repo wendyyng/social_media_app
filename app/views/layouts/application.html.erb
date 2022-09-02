@@ -16,94 +16,121 @@
 
 
   <body>
-    <div class="container-fluid mt-5 custombg">
+
+<style>
+
+
+.hero {
+  background-image: url("https://images.pexels.com/photos/708392/pexels-photo-708392.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+  background-size: cover;
+}
+
+footer {
+    /* background-color: #1f2937; */
+    background-color: black;
+    color: #F9FAF8;
+}
+
+.hero {
+
+height: 90vh;
+padding-bottom: 
+
+}
+
+#hero-main-text {
+  margin-top: 2em
+}
+
+/*Footer*/
+footer {
+  margin-top: 5em;
+  
+    height: 5em;
+    text-align: center;
+    padding: 30px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+</style>
+
+
+
+
+   <div class="container-fluid" id="banner">
         <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container-fluid d-flex">
-      <a class="m-2" alt="" href=''>
-       <%# <%= image_tag "https://i.picsum.photos/id/447/200/200.jpg?grayscale&hmac=DRqS_yApBEh_6rknbD1H-VT8vbIR-G8vVwKtTTarh-U", id: 'logo'%>  %>
-      </a>
-        <a class="navbar-brand fw-bold ml-5" href="<%= root_path %>">FriendMe</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+           <div class="container-fluid d-flex p-0">
+
+            <div class="container">
+
+              <a class="navbar-brand fw-bold fw-bold primary" href="<%= root_path %>">FriendMe<i class="child icon"></i></a>
+
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navtoggler" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="box-shadow: none !important;">
+            <span class="navbar-toggler-icon"></span>
+            </button>
 
 
 
-
-            <% if user_signed_in? %>
-              <% if current_user.pending_invitations %>
-      
-
-
-              <div class="ui compact menu">
-
-                  <a class="item">
-                    <i class="icon mail"></i>
-                    <div class="floating ui red label">22</div>
-                  </a>
-
-                  <a class="item">
-                    <i class="icon user"></i>
-                    <%if current_user.pending_invitations.count > 0 %>
-                    <div class="floating ui red label"><%=current_user.pending_invitations.count%></div>
-                    <% else %>
-                    <div class="floating ui"></div>
-                    <% end %>
-                  </a>
-                </div>
-
-
-              <% end %>
-
-      <%# Search bar %>
+            <div class="collapse navbar-collapse" id="navtoggler" >
+            <%# Search bar %>
             <div class="container mr-5" style="width: 25em">
               <%= render 'search/form' %>
             </div>
-            
-              <ul class="navbar-nav d-flex flex-row align-items-baseline" style="width: 20em">
-        <div class="collapse navbar-collapse d-flex" id="navbarNavDropdown">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="<%= groups_path %>">Groups</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="<%= new_group_path %>">New Group</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Misc
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-            <li><hr class="dropdown-divider"></li>
-
-              </ul>
-            </li>
-
-              <li class="nav-item">
-                <a class="nav-link disabled">Hello <%= current_user.full_name %> </a>
-              </li>
-              <li class="nav-item">
-              <div><%= button_to "Log out", sessions_path, method: :delete, class: "btn btn-danger" %></div>
-              </li>
+              <ul class="navbar-nav d-flex flex-row align-items-baseline" style="width: 30em">
               
-            <% else %>
-              <li class="nav-item">
-                <div class="nav-link">
-                  <a class="btn btn-light btn-sm" href="<%= new_sessions_path %>">Sign In</a>
-                </div>
+                <% if user_signed_in? %>
+                <li class="nav-item m-1">
+                  <a class="nav-link text-dark" href="<%= groups_path %>">Groups</a>
+                </li>
+                <li class="nav-item m-1">
+                  <a class="nav-link text-dark" href="<%= users_path %>">Users</a>
+                </li>
+                   <li class="nav-item m-1">
+                  <a class="nav-link position-relative" href="<%= show_user_panel_path %>">
+                    Hi <%= current_user.first_name %>
+                  </a>
               </li>
-              <li class="nav-item">
-                <div class="nav-link">
-                  <a class="btn btn-light btn-sm" href="<%= new_user_path %>">Sign Up</a>
-                </div>
+
+
+                <li class="nav-item m-1">
+                 <div class="ui compact menu" style="position: relative; border: none !important">
+                    <a class="item" href="<%= show_user_panel_path %>">
+                      <i class="icon users"></i>
+
+
+                      <% if current_user.pending_invitations.count > 0 %>
+                      <div class="floating ui teal label"><%=current_user.pending_invitations.count %></div>
+                      <% end %>
+
+
+                    </a>
+                  </div>
+                </li>
+
+              <li class="nav-item m-1 ms-2">
+                <%= button_to "Log out", sessions_path, method: :delete, class: "ui primary button" %>
               </li>
-            <% end %>
-          </ul>
-        </div>
+                <% else %>
+                <%# Sign In & Sign Up %>
+                <li class="nav-item m-1">
+                  <a class="nav-link text-dark " href="<%= groups_path %>">Groups</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-link nav-link text-dark " href="<%= new_sessions_path %>">Sign In</a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="btn btn-link nav-link text-dark " href="<%= new_user_path %>">Sign Up</a>
+                </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </nav>
       </div>
-    </nav>
-</div>
 
     <% flash.each do |type, message| %>
       <div class="d-flex flex-row-reverse">
@@ -117,8 +144,10 @@
 
 
     <%= yield %>
+    <footer>
+        <span>Copyright ©  FriendMe<i class="child icon"></i>2022</span>
+    </footer>
      <!-- JavaScript Bundle with Popper -->
-    <%# <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script> %>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
   </body>
 </html>
