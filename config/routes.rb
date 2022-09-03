@@ -21,9 +21,7 @@ Rails.application.routes.draw do
   resources :users, only:[:create, :new, :show, :edit, :update, :index, :destroy]
   resource :sessions, only: [:new, :create, :destroy]
 
-  resources :events
-
-  get 'search/', to: "search#index"
+  # resources :events
 
 
   get 'invitations/update'

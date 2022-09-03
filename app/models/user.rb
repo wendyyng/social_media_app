@@ -1,5 +1,7 @@
 class User < ApplicationRecord
     has_secure_password
+    VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+    validates :email, presence: true, uniqueness: true, format: VALID_EMAIL_REGEX
 
     has_many :groups, dependent: :destroy
     has_many :group_posts, dependent: :nullify
@@ -15,7 +17,8 @@ class User < ApplicationRecord
     has_one_attached :image
 
     has_many :created_events, class_name: "Event", foreign_key: "organizer_id", dependent: :destroy
-
+    has_many :attending_events, dependent: :destroy
+    has_many :attended_events, through: :attending_events, source: :event, foreign_key: "attendee_id"
     has_many :invitations
     has_many :pending_invitations, -> { where confirmed: false }, class_name: 'Invitation', foreign_key: "friend_id"
 

@@ -25,13 +25,17 @@ class UsersController < ApplicationController
     def show
         @user = User.find params[:id]
         @friends = @user.friends
-
+        @attended_events = current_user.attended_events
     end
 
     def user_panel
       @received_requests = current_user.pending_invitations
       @sent_requests = current_user.invitations
       @friends = current_user.friends
+    end
+
+    def show_attended_events
+        @attended_events = current_user.attended_events
     end
 
     def edit

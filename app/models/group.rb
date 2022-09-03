@@ -9,4 +9,8 @@ class Group < ApplicationRecord
     has_many :users, through: :memberships
 
     has_rich_text :description
+
+    validates :title, presence: { message: "Body must be provided" }, length: { minimum: 3, too_short: "Title must be 3 characters minimum." }
+
+    
 end

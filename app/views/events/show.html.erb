@@ -1,0 +1,13 @@
+
+    <%= @event.title %>
+    <%= @event.description %>
+    <%= @event.date %>
+    <%= @event.location %>
+    <%= @event.organizer.full_name %>
+
+<% if current_user && event.organizer != current_user && !event.attendees.include?(current_user%>
+<%= link_to "Register", attending_event_path(:user_id => current_user.id, :id => event.id),
+method: :post, class: "ui button" %>
+<% else %>
+<div>You have registered already!</div>
+<% end %>
