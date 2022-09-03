@@ -46,8 +46,6 @@ padding-bottom:
 
 /*Footer*/
 footer {
-  margin-top: 5em;
-  
     height: 5em;
     text-align: center;
     padding: 30px;
@@ -79,10 +77,10 @@ footer {
 
             <div class="collapse navbar-collapse" id="navtoggler" >
             <%# Search bar %>
-            <div class="container mr-5" style="width: 25em">
+            <div class="container mr-5" style="width: 30em">
               <%= render 'search/form' %>
             </div>
-              <ul class="navbar-nav d-flex flex-end" style="width: 30em">
+              <ul class="navbar-nav d-flex justify-content-end" style="width: 27em">
               
                 <% if user_signed_in? %>
                 <li class="nav-item m-1">
@@ -131,7 +129,7 @@ footer {
         </nav>
       </div>
 
-      <div class="d-flex flex-row-reverse ">
+      <div class="d-flex flex-row-reverse">
     <% flash.each do |type, message| %>
       <div class="ui floating message alert alert-success alert-dismissible" role="alert">
       <i class="bell icon"></i>
