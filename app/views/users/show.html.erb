@@ -17,7 +17,7 @@
                                   <%= link_to image_tag(@user.image_as_thumbnail), @user.image %>
                                   <% else %>
                           <div class="image mb-2 ">
-                          <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" style="width: 5em"/>
+                          <img src="<%= @user.profile_img_url %>" style="width: 5em"/>
                             </div>
                           <% end %>
 

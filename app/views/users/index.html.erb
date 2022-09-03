@@ -1,4 +1,4 @@
-<div class="container m-4 flex justify-content-center align-items-center">
+<%# <div class="container m-4 d-flex justify-content-center align-items-center"> %>
 <div class="ui link cards flex justify-content-center align-items-start m-4">
 
     <% @users.each do |user| %>
@@ -9,7 +9,7 @@
 
               <div class="card">
             <div class="image">
-              <img src="https://semantic-ui.com/images/avatar2/large/elyse.png">
+              <img src="<%= user.profile_img_url %>">
             </div>
             <div class="content">
               <div class="header"><%= link_to user.full_name, user_path(user), style:"text-decoration: none; color: black" %></div>
@@ -48,6 +48,7 @@
             
             <%= link_to 'Edit', edit_user_path(user), class:"text-black" %>
           </div>
+
     
 
 
@@ -66,6 +67,6 @@
 
 
 
-<br>
 
-</div>
+
+<%# </div> %>

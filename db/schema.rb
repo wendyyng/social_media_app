@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_03_080853) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_03_191843) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -113,6 +113,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_03_080853) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "img_url", default: "https://media.istockphoto.com/photos/business-people-having-a-meeting-picture-id1015934018?k=20&m=1015934018&s=612x612&w=0&h=9Q6gt-coI62h0uqok1FReHMhN_-M7ZhvyrTxNdEqGgg="
     t.index ["user_id"], name: "index_groups_on_user_id"
   end
 
@@ -161,6 +162,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_03_080853) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_admin", default: false
+    t.text "profile_img_url", default: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

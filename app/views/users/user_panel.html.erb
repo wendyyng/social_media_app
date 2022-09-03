@@ -132,11 +132,18 @@
                                   <%= link_to image_tag(current_user.image_as_thumbnail), current_user.image %>
                                   <% else %>
                           <div class="image mb-2 ">
-                          <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" style="width: 5em"/>
+                          <img src="<%= current_user.profile_img_url %>" style="width: 5em"/>
                           <% end %>
                             </div>
                             <button class="primary basic button ui">
+                                <%= link_to 'Your Page', user_path(current_user) %>
+                              </button>
+                            <button class="primary basic button ui">
                                 <%= link_to 'Update Profile', edit_user_path(current_user) %>
+                              </button>
+                              <br>
+                            <button class="primary basic button ui">
+                                <%= link_to 'Create Group', new_group_path %>
                               </button>
                           <p></p>
           </div>
@@ -159,7 +166,7 @@
                 <div class="ui cards">
                <div class="card">
                 <div class="content">
-                  <img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar2/large/matthew.png">
+                  <img class="right floated mini ui image" src="<%= invitation.user.profile_img_url %>">
                   <div class="header">
                     <%= User.find(invitation.user_id).full_name %>
                   </div>
@@ -195,9 +202,8 @@
 
 
 
-          <div class="ui cards">
+          <div class="ui cards flex justify-content-center ">
           <% @sent_requests.where(confirmed: false).each do |invitation|%>
-
           <div class="card">
             <div class="content">
               <div class="header"><%= User.find(invitation.friend_id).full_name %></div>
@@ -210,16 +216,10 @@
               <%= link_to 'Unsend Invitation', invitations_unsent_path(invitation_id: invitation.id) %>
             </div>
           </div>
-
-              </div>
       <% end %>
-
-
-
-
-
-            <% end %>
+              </div>
             </div>
+            <% end %>
 
 
 
@@ -239,33 +239,6 @@
 
 
 
-
-
-
-
-
-
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
 
 
 

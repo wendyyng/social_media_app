@@ -1,3 +1,5 @@
+
+            <% if @membership.present? %>
 <div class="container">
     <div class="row">
         <div class="col-8 col-md-8 col-sm-6">
@@ -13,7 +15,6 @@
            <%# new post %>
            <%# new post %>
            <%# new post %>
-            <% if @membership.present? %>
     <div class="container card shadow p-3 mb-5 bg-white rounded m-4" >
                 <h2>New Post</h2>
                     <%= form_with(model:[@group, @group_post]) do |f| %>
@@ -47,7 +48,7 @@
         <div class="ui comments">
         <div class="comment">
                 <a class="avatar">
-                <img src="https://i.pravatar.cc/">
+                <img src="<%= group_post.user.profile_img_url%>">
                 </a>
                 <div class="content">
                 <a class="author">
@@ -111,7 +112,7 @@
 
             <div class="comment">
                 <a class="avatar">
-                <img src="https://i.pravatar.cc/">
+                <img src="<%= comment.user.profile_img_url%>">
                 </a>
                 <div class="content">
                 <a class="author">
@@ -139,32 +140,7 @@
     </div>
 <% end %>
 </div>
-<%# If user is not a member %>
-<% else %>
 
-
-        <div class="card container card shadow p-3 mb-5 bg-white rounded m-4" >
-            <h1><%= @group.title %></h1>
-            <p><%= @group.description %></p>
-            <p>Created by <%= @group.user.full_name %></p>
-            <p><%= @group.memberships.count %>  <%= "member".pluralize(@group.memberships.count) %>  ·
- 
-            <%= @group.group_posts.count %> <%= "post".pluralize(@group.group_posts.count) %>
-            </p>
-
-            <span><i class="map pin icon"></i>Vancouver BC, Canada</span>
-            <br>
-            <small>
-            <% if @membership.present? %>
-                <%= button_to "Leave Group", membership_path(@membership), method: :delete, class:"ui red button p-3" %>
-                <% elsif user_signed_in? %>
-                <%= button_to "Join Group", group_memberships_path(@group), method: :post, class:"ui button btn btn-dark  p-3 mt-2" %>
-            <% end%>
-            </small>
-        </div>
-
-
-<% end %>
 
 
 
@@ -220,7 +196,7 @@
                 <% @members.each do |member| %>
                     <div class="comment">
                         <a class="avatar">
-                        <img src="https://i.pravatar.cc/">
+                        <img src="<%= member.user.profile_img_url %>">
                         </a>
                         <div class="content">
                         <a class="author">
@@ -254,6 +230,38 @@
     </div>
 </div>
 
+<%# If user is not a member %>
+<% else %>
+        <div class="container">
+        <div class="container justify-content-center align-items-center">
+        <div class="card container card shadow p-5 mb-5 bg-white rounded m-4 justify-content-center align-items-center">
+            <div class="content">
+            <img src="<%= @group.img_url %>" class="ui rounded image"/>
+          
+            <h1><%= @group.title %></h1>
+            <p><%= @group.description %></p>
+            <p>Created by <%= @group.user.full_name %></p>
+            <p><%= @group.memberships.count %>  <%= "member".pluralize(@group.memberships.count) %>  ·
+ 
+            <%= @group.group_posts.count %> <%= "post".pluralize(@group.group_posts.count) %>
+            </p>
+
+            <span><i class="map pin icon"></i>Vancouver BC, Canada</span>
+            <br>
+            <small>
+            <% if @membership.present? %>
+                <%= button_to "Leave Group", membership_path(@membership), method: :delete, class:"ui red button p-3" %>
+                <% elsif user_signed_in? %>
+                <%= button_to "Join Group", group_memberships_path(@group), method: :post, class:"ui button btn btn-dark  p-3 mt-2" %>
+            <% end%>
+            </small>
+            </div>
+        </div>
+        </div>
+        </div>
+
+
+<% end %>
 
 
 

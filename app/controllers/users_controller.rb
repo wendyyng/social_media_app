@@ -45,11 +45,12 @@ class UsersController < ApplicationController
     end
 
     def update
-        if @user.update(params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :image))
-            redirect_to show_user_panel(@user)
-          else
-            render :edit
-          end
+        @user = User.find params[:id]
+        if @user.update(params.require(:user).permit(:first_name, :last_name, :email, :profile_img_url))
+            redirect_to show_user_panel_url(@user)
+         else
+          render :edit
+        end
     end
 
     def destroy
