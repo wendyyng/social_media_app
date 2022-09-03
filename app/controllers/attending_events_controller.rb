@@ -7,9 +7,10 @@ class AttendingEventsController < ApplicationController
     def create
         @event = Event.find(params[:id])
         @event.attendees << current_user
+
         if @event.save
             flash.notice = 'Registered successfully'
-            redirect_to show_user_panel_path
+            redirect_to event_path(@event)
         end
     end
 

@@ -21,7 +21,11 @@ Rails.application.routes.draw do
   resources :users, only:[:create, :new, :show, :edit, :update, :index, :destroy]
   resource :sessions, only: [:new, :create, :destroy]
 
-  # resources :events
+  get 'search', to: 'search#index'
+  resources :events
+  post '/users/:user_id/events/:id', to: "attending_events#create", as: "create_attending_event"
+  get '/users/:id/attended_events', to: "user#show_attended_events", as: "show_attended_events"
+  delete '/users/:user_id/events/:id', to: "attending_events#destroy", as: "destroy_attending_event"
 
 
   get 'invitations/update'

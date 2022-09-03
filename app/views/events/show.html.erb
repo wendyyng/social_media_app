@@ -5,9 +5,44 @@
     <%= @event.location %>
     <%= @event.organizer.full_name %>
 
-<% if current_user && event.organizer != current_user && !event.attendees.include?(current_user%>
-<%= link_to "Register", attending_event_path(:user_id => current_user.id, :id => event.id),
-method: :post, class: "ui button" %>
-<% else %>
+<% if current_user && @event.organizer != current_user && !@event.attendees.include?(current_user)%>
+<%= button_to "Register", create_attending_event_path(:user_id => current_user.id, :id => @event.id), method: :post, class: "ui button" %>
+<% elsif current_user && @event.organizer != current_user && @event.attendees.include?(current_user) %>
 <div>You have registered already!</div>
+<%= link_to "Deregister the event", destroy_attending_event_path(:user_id => current_user.id, :id => @event.id), 
+method: :delete, class: "button ui" %>
 <% end %>
+
+
+
+<h1>Attendees:</h1>
+        <%# --------members start ----------%>
+        <div class="card container card shadow p-3 mb-5 bg-white rounded m-4" >
+
+
+                <div class="ui comments">
+  <% if @event.attendees.each do |attendee| %>  
+
+                    <div class="comment">
+                        <a class="avatar">
+                        <img src="https://i.pravatar.cc/">
+                        </a>
+                        <div class="content">
+                        <a class="author">
+                    <%= link_to user_path(attendee), class:"text-dark " do %>
+                        <%= attendee.full_name%>
+                    <% end %>
+                        </a>
+                        <div class="text">
+                        <%= attendee.created_at.strftime("Joined %B %Y") %>
+                        </div>
+                        </div>
+                    </div>
+                   
+                <% end %>
+                 </div>
+        
+        
+        </div>
+        <% end %>
+            <%# --------members ends ----------%>

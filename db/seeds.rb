@@ -54,6 +54,7 @@ users = User.all
       )
 
     if g.valid?
+      Membership.new(user:super_user, group: g)
         rand(1..3).times do
           gp = GroupPost.create(body: Faker::Hipster.sentence, user: users.sample, group: g)
           if gp.valid?
