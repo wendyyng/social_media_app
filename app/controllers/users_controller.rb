@@ -26,6 +26,7 @@ class UsersController < ApplicationController
         @user = User.find params[:id]
         @friends = @user.friends
         @attended_events = current_user.attended_events
+        @posts = @user.posts
     end
 
     def user_panel
