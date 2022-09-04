@@ -104,9 +104,21 @@
 
   <div class="card container card shadow p-3 mb-5 bg-white rounded m-4 flex justify-content-center align-items-center" >
     <h1>Your Events:</h1>
-    <%# <%= link_to "Create a New Event", new_event_path, class:"ui button"%>
+    <div class="ui cards flex justify-content-center align-items-center">
+      <% @organized_events.each do |event|%>
 
-   %>
+       <div class="card" >
+              <div class="content">
+                <div class="header">
+                <p><%= link_to event.title, event_path(event), style:"text-decoration: none; color: black" %></p></div>
+                      <div class="description">
+                  <%= event.description %>
+                </div>
+              </div>
+          </div>
+
+    <% end %>
+    </div>
   </div>
 
 
@@ -138,22 +150,27 @@
                           <% if current_user.address?%>
                           <h6>Your location: <%= current_user.address.capitalize() %></h6>
                           <% end %>
-                            <button class="primary basic button ui">
-                                <%= link_to 'See Your Profile', user_path(current_user) %>
+                            <button class="primary basic button ui mb-1" style="width: 12em">
+                                <%= link_to 'Your Profile', user_path(current_user) %>
                               </button>
-                             <br>
-                            <button class="primary basic button ui">
+                            
+                            <button class="primary basic button ui mb-1" style="width: 12em">
                                 <%= link_to 'Update Profile', edit_user_path(current_user) %>
                               </button>
-                              <br>
-                            <button class="primary basic button ui">
+                             <br>
+                            <button class="primary basic button ui mb-1" style="width: 12em">
                                 <%= link_to 'Create New Post', new_post_path %>
                               </button>
-                              <br>
-                            <button class="primary basic button ui">
+                            <br>
+                            <button class="primary basic button ui mb-1" style="width: 12em">
                                 <%= link_to 'Create Group', new_group_path %>
                               </button>
-                          <p></p>
+                             <br> 
+                            <button class="primary basic button ui" style="width: 12em">
+                                <%= link_to 'Create Meetup', new_event_path %>
+                              </button>
+                              <br>
+             
           </div>
           </div>
 

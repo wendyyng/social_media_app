@@ -1,48 +1,102 @@
-
-    <%= @event.title %>
-    <%= @event.description %>
-    <%= @event.date %>
-    <%= @event.location %>
-    <%= @event.organizer.full_name %>
-
-<% if current_user && @event.organizer != current_user && !@event.attendees.include?(current_user)%>
-<%= button_to "Register", create_attending_event_path(:user_id => current_user.id, :id => @event.id), method: :post, class: "ui button" %>
-<% elsif current_user && @event.organizer != current_user && @event.attendees.include?(current_user) %>
-<div>You have registered already!</div>
-<%= link_to "Deregister the event", destroy_attending_event_path(:user_id => current_user.id, :id => @event.id), 
-method: :delete, class: "button ui" %>
-<% end %>
+<div class="container">
+    <div class="row">
+        <div class="col-8 col-md-8 col-sm-6">
+           <%# left starts %>
+         <div class="container card shadow p-3 mb-5 bg-white rounded m-4" >
+            <h1>Meetup: <%= @event.title %></h1>
+            <p>Description: <%= @event.description %></p>
+            <p>Date: <%= @event.date %></p>
+            <p>Organizer: <%= @event.organizer.full_name %></p>
+            <p>Location: <%= @event.location %></p>
 
 
+            <% if @event.longitude%>
+              <h1>Location</h1>
+              <% if current_user.longitude %>
+            <p><%= number_with_delimiter(@distance, :delimiter => ',') %> km away from your current location</p>
+            <% end %>
+            <div >
+            <div id="map" style='width: 18em; height: 12em;'></div>
+            </div>   
+            <% end %>
 
-<h1>Attendees:</h1>
-        <%# --------members start ----------%>
-        <div class="card container card shadow p-3 mb-5 bg-white rounded m-4" >
 
+            <% if current_user && @event.organizer != current_user && !@event.attendees.include?(current_user)%>
+                <%= button_to "Register", create_attending_event_path(:user_id => current_user.id, :id => @event.id), method: :post, class: "ui button" %>
+            <% elsif current_user && @event.organizer != current_user && @event.attendees.include?(current_user) %>
+                <div>You have registered already!</div>
+                <%= button_to "Deregister the event", destroy_attending_event_path(current_user, @event), 
+                method: :delete, class: "button ui mt-1" %>
+            <% end %>
 
+            <% if current_user && current_user == @event.organizer %>
+                <div class="mb-1"><%= link_to "Edit Event", edit_event_path(@event.id), class:"ui button" %></div>
+                <div><%= link_to "Delete Event", event_path(@event.id), method: :delete, class:"ui button" %></div>
+            <% end %>
+        </div>
+            <%# left ends %>
+        </div>
+        <div class="col-4 col-md-4 col-sm-6">
+           <%# right starts %>
+          
+       <% if @event.attendees.any? %> 
+         <div class="container card shadow p-3 mb-5 bg-white rounded m-4" >
+            <h1>Attendees:</h1>
+            <%# --------attendees start ----------%>
+            <div class="card container p-2" >
                 <div class="ui comments">
-  <% if @event.attendees.each do |attendee| %>  
 
-                    <div class="comment">
+                <% if @event.attendees.each do |attendee| %>  
+
+                    <div class="comment m-1">
                         <a class="avatar">
-                        <img src="https://i.pravatar.cc/">
+                            <img src="https://i.pravatar.cc/">
                         </a>
                         <div class="content">
-                        <a class="author">
-                    <%= link_to user_path(attendee), class:"text-dark " do %>
-                        <%= attendee.full_name%>
-                    <% end %>
-                        </a>
-                        <div class="text">
-                        <%= attendee.created_at.strftime("Joined %B %Y") %>
-                        </div>
+                            <a class="author">
+                            <%= link_to user_path(attendee), class:"text-dark " do %>
+                                 <%= attendee.full_name%>
+                            <% end %>
+                            </a>
+                            <div class="text">
+                             <%= attendee.created_at.strftime("Joined %B %Y") %>
+                            </div>
                         </div>
                     </div>
-                   
+
                 <% end %>
-                 </div>
-        
-        
+
+                </div>
+            </div>
+        <% end %>
+            <%# --------attendees ends ----------%>  
         </div>
         <% end %>
-            <%# --------members ends ----------%>
+            <%# right ends %>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    //This is to create the map
+    //see this documentation: https://github.com/apneadiving/Google-Maps-for-Rails
+
+    handler = Gmaps.build('Google');
+    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+    markers = handler.addMarkers([
+        {
+        "lat": <%= @event.latitude %>, 
+        "lng": <%= @event.longitude %>,  
+        "picture": {
+            "width":  2,
+            "height": 2
+        },
+        "infowindow": "<%= @event.location %>"
+        }
+    ]);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+    handler.getMap().setZoom(8); //we are adding this to zoom in a bit
+});
+</script>

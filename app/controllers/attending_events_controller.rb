@@ -14,5 +14,12 @@ class AttendingEventsController < ApplicationController
         end
     end
 
+    def destroy
+        @event = Event.find params[:id]
+        user = @event.attendees.delete(current_user)
+        flash[:notice]= "You have deregistered!!"
+        redirect_to event_path(@event)
+    end
+
 
 end

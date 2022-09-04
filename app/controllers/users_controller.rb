@@ -34,6 +34,7 @@ class UsersController < ApplicationController
       @sent_requests = current_user.invitations
       @friends = current_user.friends
       @attended_events = current_user.attended_events
+      @organized_events = Event.where(organizer: current_user)
     end
 
     def show_attended_events
