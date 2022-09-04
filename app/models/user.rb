@@ -1,4 +1,9 @@
 class User < ApplicationRecord
+    geocoded_by :address
+    #We are stating here that we are converting the address to geocode
+    #when a user saves an address, it will automatically convert it to latitude and longitude as well
+    after_validation :geocode
+    
     has_secure_password
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
     validates :email, presence: true, uniqueness: true, format: VALID_EMAIL_REGEX

@@ -46,7 +46,7 @@ class UsersController < ApplicationController
 
     def update
         @user = User.find params[:id]
-        if @user.update(params.require(:user).permit(:first_name, :last_name, :email, :profile_img_url))
+        if @user.update(params.require(:user).permit(:first_name, :last_name, :email, :profile_img_url, :address))
             redirect_to show_user_panel_url(@user)
          else
           render :edit

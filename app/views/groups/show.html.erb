@@ -171,8 +171,10 @@
             <h1><%= @group.title %></h1>
             <p><%= @group.description %></p>
             <p>Created by <%= @group.user.full_name %></p>
-            
-            <p><i class="map pin icon"></i>Vancouver BC, Canada</p>
+    
+            <% if @group.address? %>
+            <span><i class="map pin icon"></i><%= @group.address.capitalize() %></span>
+            <% end %>
             <br>
             <p><%= @group.memberships.count %>  <%= "member".pluralize(@group.memberships.count) %>  ·
  
@@ -189,12 +191,15 @@
         </div>
         <%# --------group info ends ----------%>
         <%# --------map starts----------%>
+        <% if @group.longitude && current_user.longitude %>
         <div class="card container card shadow p-3 mb-5 bg-white rounded m-4 justify-content-center align-items-center" >
             <h1>Location</h1>
+            <p><%= number_with_delimiter(@distance, :delimiter => ',') %> km away from home</p>
             <div >
-            <div id="map" style='width: 25em; height: 20em;'></div>
+            <div id="map" style='width: 18em; height: 12em;'></div>
             </div>
         </div>
+        <% end %>
            <%# --------map ends----------%>
         <% end %>
          <% if @membership.present? %>  
@@ -256,8 +261,12 @@
  
             <%= @group.group_posts.count %> <%= "post".pluralize(@group.group_posts.count) %>
             </p>
+            <% if @group.address %>
+            <span><i class="map pin icon"></i><%= @group.address.capitalize() %></span>
+            <br><br>
+             <p><%= number_with_delimiter(@distance, :delimiter => ',') %> km away from home</p>
 
-            <span><i class="map pin icon"></i>Vancouver BC, Canada</span>
+            <% end %>
             <br>
             <small>
             <% if @membership.present? %>
