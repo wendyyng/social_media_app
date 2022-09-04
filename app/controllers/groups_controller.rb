@@ -13,6 +13,7 @@ class GroupsController < ApplicationController
         @members = Membership.where(group: @group)
         @comment.group_post = @group_post
         @group_posts = @group.group_posts.order(created_at: :desc)
+        @distance = group_user_distance_km(@group, current_user)
         if current_user
           @membership = current_user.memberships.find_by(group: @group) 
         end
@@ -48,6 +49,37 @@ class GroupsController < ApplicationController
 
     def group_params
         params.require(:group).permit(:title, :description, :img_url, :address)
+    end
+
+    def group_user_distance_km(group, user)
+      rkm = 6371; #Radius of the earth in km
+      rad_per_deg = Math::PI/180  # PI / 180
+
+      glon = group.longitude
+      glat = group.latitude
+      ulon = user.longitude
+      ulat = user.latitude
+
+      # first add our own radians function since Ruby Math does not have one
+      radians = -> (degrees) { degrees * (Math::PI / 180)}
+
+      # convert latitude degrees to radians
+      phi_1 = radians.call(glat);
+      phi_2 = radians.call(ulat);
+
+      # delta being the "difference" between the latitudes and longitudes of each coordinate set expressed
+      # in radians
+      delta_phi = radians.call(ulat - glat);
+      delta_lambda = radians.call(ulon - glon);
+
+      # sin²(φB - φA/2) + cos φA * cos φB * sin²(λB - λA/2)
+      a = Math.sin(delta_phi/2.0)**2 + Math.cos(phi_1) * Math.cos(phi_2) * Math.sin(delta_lambda/2.0)**2;
+
+      # 2 * atan2( √a, √(1−a) )
+      c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+      kilometers = (R * c).round(2)
+      
     end
 
 end
