@@ -2,7 +2,7 @@ class PostsController < ApplicationController
     before_action :authenticate_user!
 
     def new
-        @group_post = GroupPost.new
+        @post = Post.new
     end
 
     def create
@@ -17,7 +17,8 @@ class PostsController < ApplicationController
     end
 
     def edit
-
+        @user = current_user
+        @post = Post.new(post_params)
     end
 
     def update
@@ -38,7 +39,7 @@ class PostsController < ApplicationController
     private
 
     def post_params
-        params.require(:post).permit(:title, :description)
+        params.require(:post).permit(:title, :description, :image)
     end
 
 end

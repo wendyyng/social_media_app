@@ -18,7 +18,9 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :users, only:[:create, :new, :show, :edit, :update, :index, :destroy]
+  resources :users, only:[:create, :new, :show, :edit, :update, :index, :destroy] do
+  end
+  resources :posts, only: [:new, :create, :destroy, :edit, :update]
   resource :sessions, only: [:new, :create, :destroy]
 
   get 'search', to: 'search#index'

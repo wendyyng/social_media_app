@@ -86,6 +86,8 @@
         </small>
         <% if group_post.likes.present? %>
         <span><%= group_post.likes.count%> <%= 'Like'.pluralize(group_post.likes.count) %></span>
+        <% else %>
+        <span>Be the first to like</span>
         <% end %>
         </hr>
         </hr>
@@ -165,6 +167,7 @@
             <% if @membership.present? %>  
         <%#---------- group info starts ---------%>
         <div class="card container card shadow p-3 mb-5 bg-white rounded m-4" >
+         <img src="<%= @group.img_url %>" class="ui rounded image"/>
             <h1><%= @group.title %></h1>
             <p><%= @group.description %></p>
             <p>Created by <%= @group.user.full_name %></p>
