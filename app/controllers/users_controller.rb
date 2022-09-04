@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
     before_action :authenticate_user!, only: [:index, :show, :edit, :update, :user_panel]
     before_action :authorize_user!, only: [:edit]
+    def index
+        @users = User.all.order(created_at: :desc)
+    end
     
     def new
         @user = User.new
@@ -18,9 +21,6 @@ class UsersController < ApplicationController
         end
     end
 
-    def index
-        @users = User.all.order(created_at: :desc)
-    end
     
     def show
         @user = User.find params[:id]
@@ -59,7 +59,6 @@ class UsersController < ApplicationController
         flash[:notice]= "User has been removed!"
         redirect_to users_path
     end
-
 
     private
 

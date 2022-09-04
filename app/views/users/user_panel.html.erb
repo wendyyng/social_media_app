@@ -133,12 +133,15 @@
                                   <% else %>
                           <div class="image mb-2 ">
                           <img src="<%= current_user.profile_img_url %>" style="width: 5em"/>
-                          <% end %>
                             </div>
+                          <% end %>
+                          <% if current_user.address?%>
+                          <h6>Your location: <%= current_user.address %></h6>
+                          <% end %>
                             <button class="primary basic button ui">
                                 <%= link_to 'See Your Profile', user_path(current_user) %>
                               </button>
-                             
+                             <br>
                             <button class="primary basic button ui">
                                 <%= link_to 'Update Profile', edit_user_path(current_user) %>
                               </button>

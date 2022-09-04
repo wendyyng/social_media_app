@@ -2,6 +2,7 @@ class GroupsController < ApplicationController
   before_action :find_group, only: [:show, :edit, :update, :destroy]
   before_action :authorize_user!, only: [:edit, :update, :destroy]
   before_action :authenticate_user!
+  
     def index
         @groups = Group.order(created_at: :desc)
     end
@@ -35,6 +36,20 @@ class GroupsController < ApplicationController
           flash[:error] = "Invalid Group"
           render :new
         end
+    end
+
+    def edit
+      
+    end
+
+    def update
+     
+        if @group.update(group_params)
+            redirect_to group_path(@group)
+         else
+          render :edit
+        end
+      
     end
 
     private
