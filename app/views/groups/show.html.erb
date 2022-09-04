@@ -188,6 +188,14 @@
 
         </div>
         <%# --------group info ends ----------%>
+        <%# --------map starts----------%>
+        <div class="card container card shadow p-3 mb-5 bg-white rounded m-4 justify-content-center align-items-center" >
+            <h1>Location</h1>
+            <div >
+            <div id="map" style='width: 25em; height: 20em;'></div>
+            </div>
+        </div>
+           <%# --------map ends----------%>
         <% end %>
          <% if @membership.present? %>  
         <%# --------members start ----------%>
@@ -267,33 +275,26 @@
 <% end %>
 
 
+<script>
+    //This is to create the map
+    //see this documentation: https://github.com/apneadiving/Google-Maps-for-Rails
 
+    handler = Gmaps.build('Google');
+    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+    markers = handler.addMarkers([
+        {
+        "lat": <%= @group.latitude %>, 
+        "lng": <%= @group.longitude %>,  
+        "picture": {
+            "width":  2,
+            "height": 2
+        },
+        "infowindow": "<%= @group.address %>"
+        }
+    ]);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+    handler.getMap().setZoom(8); //we are adding this to zoom in a bit
+});
+</script>
 
-
-
-
-
-
-
-
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>
-<%# layout %>

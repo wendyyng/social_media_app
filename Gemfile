@@ -47,9 +47,15 @@ gem "bootsnap", require: false
 
 gem "faker", "~> 2.11"
 # gem 'pry', '~> 0.14.1'
-gem 'cancancan', '~> 3.4'
+gem 'cancancan', '~> 3.4' #
 gem "ransack", "~> 3.2"
 gem 'simple_form'
+
+# Gems for geocoding
+gem 'geocoder' #converts address to longitude and latitude
+gem 'gmaps4rails' #Google map
+gem 'underscore-rails', '~> 1.8', '>= 1.8.3' #asset pipeline provider: helps to display the map
+
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
