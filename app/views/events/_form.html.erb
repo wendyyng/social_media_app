@@ -1,0 +1,25 @@
+
+
+
+<div class="container">
+
+<%= simple_form_for(@event) do |f|%>
+<% f.error_notification %>
+<div class="field">
+ 
+    <div class="control">
+    <%= f.input :title, class:"form-control" %>
+    <br>
+    <%= f.input :date, as: :datetime, :order => [:month, :day, :year, :hour, :minute], class:"form-control" %>
+    <br>
+    <%= f.input :location, class:"form-control"%>
+    <br>
+    <%= f.input :description, class:"form-control" %>
+    <br>
+    <%= f.button :submit, class:"ui primary button mt-2" %>
+    </div>
+  
+    </div>
+<% end %>
+ </div>
+

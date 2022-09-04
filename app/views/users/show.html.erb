@@ -1,52 +1,124 @@
-<h1>User's show page</h1>
 
-<p>Name: <%= @user.first_name %><p>
+<section class="bg-image"
+  >
+  
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3 pb-0">
+    <div class="container h-100 pb-0">
+      <div class="container row d-flex justify-content-center align-items-center h-100 pb-0">
+        <div class="container col-12 col-md-9 col-lg-7 col-xl-6 pb-0">
+          <div class="card m-4" style="">
+            <div class="card-body px-5 pt-5 ">
+                    
+ <%# ----------------------------------------------------%>
+                        <div class="container justify-content-center align-items-center d-flex flex-column">
+                        <h1><%= link_to @user.first_name, user_path(@user), style:"text-decoration: none; color: black" %><h1>
 
-  <%   if @user.image.attached? && @user.image.content_type.in?(%w[image/jpeg image/png image/gif])%>
-             <%= link_to image_tag(@user.image_as_thumbnail), @user.image %>
-        <% end %>
-
-<h1><%= link_to @user.first_name, user_path(@user), style:"text-decoration: none; color: black" %></h1>
-
-<p>Email: <%=@user.email%></p>
-
-<div>
-    <h1>About me: </h1>
-    
-    
-
-        <%= link_to 'Add Friend',invitations_create_path(ids: {id1: current_user.id, id2: @user.id}), method: :post, class:"ui active button" %>
-     
-</div>
-
-
-<div>
-
-
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @user.full_name %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+                          <%   if @user.image.attached? && @user.image.content_type.in?(%w[image/jpeg image/png image/gif])%>
+                                  <%= link_to image_tag(@user.image_as_thumbnail), @user.image %>
+                                  <% else %>
+                          <div class="image mb-2 ">
+                          <img src="<%= @user.profile_img_url %>" style="width: 5em"class="rounded"/>
+                            </div>
+                          <% end %>
 
 
-<h3>Friends of <strong> <%= @user.full_name %> </strong> </h3>
+                        <% if @user != current_user && !@user.friend_with?(current_user) %>
+                        <div class="d-flex justify-content-center align-items-center">
+                          <%= link_to 'Add Friend',invitations_create_path(ids: {id1: current_user.id, id2: @user.id}), method: :post, class:"ui active button" %>
+                        </div>
+                        <% end %>
 
-<ol>
-  <% @user.friends.each do |friend| %>
-    <li>
-      <%= friend.full_name %>
-      <% if @user == current_user %>
-        <%= link_to 'Unfriend',
-        invitations_destroy_path(invitation_id: Invitation.find_invitation(@user.id, friend.id))  %>
-      <% end %>
-    </li>
-  <% end %>
-</ol>
+
+                        </div>
+                        <div >
+                        <div class="container mt-2 d-flex justify-content-center align-items-center flex-column">
+                        <h3>Friends of <strong> <%= @user.full_name %> </strong> </h3>
+                        <% if @user.friends.any? %>
+                        
+                          <% @user.friends.each do |friend| %>
+                              <div class="my-2"><i class="user icon"></i><%= link_to friend.first_name, user_path(friend), style:"text-decoration: none; color: black" %>
+                              <% if @user == current_user %>
+                                <%= link_to 'Unfriend',
+                                invitations_destroy_path(invitation_id: Invitation.find_invitation(@user.id, friend.id)), class:"ui button compact mx-2"  %>
+                              <% end %>
+                              </div>
+                            
+                          <% end %>
+                        
+                        <% else %>
+                        <p>The user has no friends!</p>
+                        <% end %>
+                           </div>
+
+                          
+                          <% if  @user.posts.any? &&  @user.friend_with?(current_user) || current_user == @user %>
+                          <hr>
+                           <div class="container px-4">
+                           <h1 >Posts</h1>
+                           <div class="ui feed">
+                           <% @posts.each do |post| %>
+                             <div class="event">
+                              <div class="label">
+                                <img src="<%= @user.profile_img_url %>">
+                              </div>
+                              <div class="content">
+                                <div class="date">
+                                  <%= time_ago_in_words(post.created_at) %> ago
+                                </div>
+                                <div class="summary">
+                                  <%= post.title %>
+                                </div>
+                                <div class="extra text">
+                                  <%= post.description %>
+                                </div>
+                                
+                                  <%   if post.image.attached? %>
+
+                                 <div class="extra images">
+                                  <a><%= image_tag(post.image_as_thumbnail) %></a>
+                                </div>
+                                <% end %>
+                              </div>
+                            </div>
+
+
+                           <% end %>
+                           </div>
+                           </div>
+                           <% end %>
+<%# ---------------------------------------------------------- %>
+                   
+            
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

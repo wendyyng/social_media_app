@@ -1,14 +1,28 @@
-	<div class="container">
-	<h1>Sign In</h1>
-	<%= form_with url: sessions_path do |form| %>
-	  <div>
-	    <%= form.label :email %>
-	    <%= form.text_field :email %>
-	  </div>
-	  <div>
-	    <%= form.label :password %>
-	    <%= form.text_field :password, type: "password" %>
-	  </div>
-	  <%= form.submit "Sign In" %>
-	<% end %>
-</div>
+<section >
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
+
+            <h3 class="mb-5">Log-in to your account</h3>
+                <div class="form-outline mb-4">
+                    <%= form_with url: sessions_path do |f|%>
+                        <div class="form-outline mb-4">
+                            <%= f.label :email, class:"form-label"%>
+                            <%= f.text_field :email, class:"form-control form-control-lg", placeholder:"Email"%>
+                        </div>
+                        <div class="form-outline mb-4">
+                            <%= f.label :password, class:"form-label"%>
+                            <%= f.password_field :password, class:"form-control form-control-lg", placeholder:"Password"%>
+                        </div>
+                        <%= f.submit 'Sign In', class:"button ui"%>
+                    <% end %>
+                </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

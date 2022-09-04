@@ -1,21 +1,35 @@
 class User < ApplicationRecord
+    geocoded_by :address
+    #We are stating here that we are converting the address to geocode
+    #when a user saves an address, it will automatically convert it to latitude and longitude as well
+    after_validation :geocode
+    
     has_secure_password
+    VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+    validates :email, presence: true, uniqueness: true, format: VALID_EMAIL_REGEX
+    validates :first_name, presence: true
+    validates :last_name, presence: true
+
+    has_many :posts, dependent: :destroy
 
     has_many :groups, dependent: :destroy
-    has_many :group_posts, dependent: :nullify
+    has_many :group_posts, dependent: :destroy
 
     has_many :comments, dependent: :destroy
 
     has_many :memberships
     has_many :groups, through: :memberships
 
-    # has_many :friendships, dependent: :destroy  
-    # has_many :friends, through: :friendships
+    has_many :likes, dependent: :destroy
+    has_many :liked_group_posts, through: :likes, source: :group_post
 
     has_one_attached :image
 
-      has_many :invitations
-      has_many :pending_invitations, -> { where confirmed: false }, class_name: 'Invitation', foreign_key: "friend_id"
+    has_many :created_events, class_name: "Event", foreign_key: "organizer_id", dependent: :destroy
+    has_many :attending_events, dependent: :destroy
+    has_many :attended_events, through: :attending_events, source: :event, foreign_key: "attendee_id"
+    has_many :invitations
+    has_many :pending_invitations, -> { where confirmed: false }, class_name: 'Invitation', foreign_key: "friend_id"
 
     def friends
       friends_i_sent_invitation = Invitation.where(user_id: id, confirmed: true).pluck(:friend_id)

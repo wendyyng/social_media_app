@@ -1,31 +1,287 @@
-
-
-<%= link_to 'Update Your Profile', edit_user_path(current_user) %>
-
-<h3>New friend requests:</h3>
-<ol>
-  <% @received_requests.each do |invitation| %>
-    <li>
-      <%= User.find(invitation.user_id).full_name %>
-      <%= link_to 'Accept Invitation',
-      invitations_update_path(invitation_id: invitation.id) %>
-      <%= link_to 'Reject Invitation',
-      invitations_unsent_path(invitation_id: invitation.id) %>
-    </li>
-  <% end %>
-</ol>
-
-<h1>Pending sent friend requests:</h1>
-
-<% @sent_requests.each do |invitation|%>
-  <p><%= User.find(invitation.friend_id).full_name %></p>
-  <%= link_to 'Unsend Invitation', invitations_unsent_path(invitation_id: invitation.id) %>
-<% end %>
+<div class="container">
+    <div class="row">
+        <div class="col-8 col-md-8 col-sm-6">
+           <%# left starts %>
+           <%# left starts %>
+           <%# left starts %>
+           <%# left starts %>
+           <%# left starts %>
+           <div class="card container card shadow p-3 mb-5 bg-white rounded m-4 flex justify-content-center align-items-center" >
+          <h1>Your Friends:</h1>
+          <% if current_user.friends.count > 0 %>
 
 
 
-<h1>Your Groups: </h1>
-<% current_user.groups.each do |group |%>
-    <p><%= group.title %></p>
-<% end %>
+
+
+          <div class="ui link cards flex justify-content-center align-items-center">
+            <% current_user.friends.each do |friend| %>
+              <div class="card">
+              <div class="image">
+                <img src="https://semantic-ui.com/images/avatar2/large/elyse.png">
+              </div>
+              <div class="content">
+                <div class="header"><%= link_to friend.full_name, user_path(friend), style:"text-decoration: none; color: black" %></div>
+                <div class="description">
+                <button class="ui button">
+                  <%= link_to 'Unfriend',
+                  invitations_destroy_from_panel_path(invitation_id: Invitation.find_invitation(current_user.id, friend.id)), class:"text-black"  %>
+                </button>
+                </div>
+              </div>
+              <div class="extra content">
+                <span class="right floated">
+                  <%= friend.created_at.strftime("Joined in %B %Y") %>
+                </span>
+                  <% if friend.friends.count > 0 %>
+                <span>
+                  <i class="user icon"></i>
+                  <%= friend.friends.count %>
+                  <%= "Friend".pluralize(friend.friends.count) %> 
+                </span>
+                <% end %>
+              </div>
+            </div>
+                
+             
+            <% end %>
+         </div>
+
+
+
+
+
+
+
+
+
+
+
+          <% else %>
+
+
+          <div class="my-3">
+          <p>You have no friends yet!</p>
+          </div>
+
+          <% end %>
+          </div>
+
+
+          <% if @current_user.groups.count > 0 %>
+           <div class="card container card shadow p-3 mb-5 bg-white rounded m-4 flex justify-content-center align-items-center" >
+          <h1>Your Groups: </h1>
+
+
+
+             <div class="ui cards flex justify-content-center align-items-center">
+          <% current_user.groups.each do |group |%>
+
+              
+            <div class="card" >
+              <div class="content">
+                <div class="header">
+                <p><%= link_to group.title, group_path(group), style:"text-decoration: none; color: black" %></p></div>
+                      <div class="description">
+                  <%= group.description %>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+          <% end %>
+           </div>
+
+
+
+
+           </div>
+           <% end %>
+
+  <div class="card container card shadow p-3 mb-5 bg-white rounded m-4 flex justify-content-center align-items-center" >
+    <h1>Your Events:</h1>
+    <%# <%= link_to "Create a New Event", new_event_path, class:"ui button"%>
+
+   %>
+  </div>
+
+
+
+            <%# left ends %>
+            <%# left ends %>
+            <%# left ends %>
+            <%# left ends %>
+            <%# left ends %>
+        </div>
+        <div class="col-4 col-md-4 col-sm-6">
+           <%# right starts %>
+           <%# right starts %>
+           <%# right starts %>
+           <%# right starts %>
+           <%# right starts %>
+
+          <div class="card container card shadow p-3 mb-5 bg-white rounded m-4" >
+           <div class="container d-flex justify-content-center align-items-center flex-column">
+                        <h1><%= link_to current_user.first_name, user_path(current_user), style:"text-decoration: none; color: black" %><h1>
+
+                          <%   if current_user.image.attached? && current_user.image.content_type.in?(%w[image/jpeg image/png image/gif])%>
+                                  <%= link_to image_tag(current_user.image_as_thumbnail), current_user.image %>
+                                  <% else %>
+                          <div class="image mb-2 ">
+                          <img src="<%= current_user.profile_img_url %>" style="width: 5em"/>
+                            </div>
+                          <% end %>
+                          <% if current_user.address?%>
+                          <h6>Your location: <%= current_user.address %></h6>
+                          <% end %>
+                            <button class="primary basic button ui">
+                                <%= link_to 'See Your Profile', user_path(current_user) %>
+                              </button>
+                             <br>
+                            <button class="primary basic button ui">
+                                <%= link_to 'Update Profile', edit_user_path(current_user) %>
+                              </button>
+                              <br>
+                            <button class="primary basic button ui">
+                                <%= link_to 'Create New Post', new_post_path %>
+                              </button>
+                              <br>
+                            <button class="primary basic button ui">
+                                <%= link_to 'Create Group', new_group_path %>
+                              </button>
+                          <p></p>
+          </div>
+          </div>
+
+
+
+
+
+
+
+
+            <% if @received_requests.count > 0 %>
+           <div class="card container card shadow p-3 mb-5 bg-white rounded m-4 flex justify-content-center align-items-center" >
+          <h1>New friend requests:</h1>
+          
+            <% @received_requests.each do |invitation| %>
+
+
+                <div class="ui cards">
+               <div class="card">
+                <div class="content">
+                  <img class="right floated mini ui image" src="<%= invitation.user.profile_img_url %>">
+                  <div class="header">
+                    <%= User.find(invitation.user_id).full_name %>
+                  </div>
+                  <div class="description">
+                  Received <%= time_ago_in_words(invitation.created_at) %>  ago
+                </div>
+                </div>
+                <div class="extra content">
+                  <div class="ui two buttons">
+                    <div class="ui primary button"><%= link_to 'Accept',
+                invitations_update_path(invitation_id: invitation.id), class:"text-white" %></div>
+               
+                    <div class="ui button"><%= link_to 'Decline',
+                invitations_unsent_path(invitation_id: invitation.id) %></div>
+                  </div>
+                </div>
+              </div>
+              </div>
+            <% end %>
+          
+            </div>
+            <% end %>
+
+
+
+<% if @sent_requests.where(confirmed: false).count > 0 %>
+    <div class="card container card shadow p-3 mb-5 bg-white rounded m-4 flex justify-content-center align-items-center" >
+          <h1>Request Pending:</h1>
+
+
+
+
+
+
+
+          <div class="ui cards flex justify-content-center ">
+          <% @sent_requests.where(confirmed: false).each do |invitation|%>
+          <div class="card">
+            <div class="content">
+              <div class="header"><%= User.find(invitation.friend_id).full_name %></div>
+              <div class="description">
+              Sent
+                <%= time_ago_in_words(invitation.created_at)  %>  ago
+              </div>
+            </div>
+            <div class="ui bottom attached button">
+              <%= link_to 'Unsend Invitation', invitations_unsent_path(invitation_id: invitation.id) %>
+            </div>
+          </div>
+      <% end %>
+              </div>
+            </div>
+            <% end %>
+
+
+
+
+
+            <%# right ends %>
+            <%# right ends %>
+            <%# right ends %>
+            <%# right ends %>
+            <%# right ends %>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

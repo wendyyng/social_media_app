@@ -1,39 +1,41 @@
-
-
-<div class="container-fluid" >
-    <div class="row">
-        <div class="col-3 px-1 bg-light position-fixed" id="sticky-sidebar" >
-            <div class="nav flex-column flex-nowrap vh-100 overflow-auto text-white p-2">
-                <a href="./" class="nav-link">Link</a>
-                <a href="./" class="nav-link">Link</a>
-                <a href="./" class="nav-link">Link</a>
-                <a href="./" class="nav-link">Link</a>
-                <a href="./" class="nav-link">Link</a>
-                <a href="./" class="nav-link">Link</a>
-            </div>
-        </div>
-        <div class="col-9 offset-3" id="main">
-           <div>Group Index</div>
-    <% if current_user %>
-      <%# <h1><%= link_to current_user.first_name, user_path(current_user.id), style:"text-decoration: none; color: black" %></h1> %>
-    <% end %>
-<%= link_to "Users", users_path %>
-
-<div class="container d-flex flex-wrap">
+<div class="container d-flex flex-wrap justify-content-center align-items-center mt-5">
 
 <% @groups.each do |group| %>
-<div class="card m-2 p-2 d-flex justify-content-around align-items-center shadow p-3 mb-5 bg-white rounded" style="width: 20rem;">
-    <img class="card-img-top p-2" src="https://picsum.photos/200" alt="Card image cap" style="height: 20rem; object-fit: cover;">
-      <h3 class="card-title fw-bold text-reset p-2" ><%= link_to group.title, group_path(group), style:"text-decoration: none; color: black" %></h3>
-         <p><%= group.description %></p>
-         <p>Created by: <%= group.user.first_name %></p>
-         <a class="ui button btn btn-dark text-uppercase p-3" href="<%= group_path(group) %>">Enter</a>
+
+
+
+
+<%# -------------------- %>
+<div class=" m-2  d-flex justify-content-around align-items-left" >
+<div class="ui card" style="width: 20rem;">
+  <div class="content">
+    <h4 class="ui">
+  <img src="<%= group.img_url %>" class="ui rounded image">
+
+ <p class="text-dark mt-2" ><%= link_to group.title, group_path(group), style:"text-decoration: none; color: black" %></p>
+            
+</h4>
+    <div class="meta">
+
+      <% if group.memberships.count > 0 %>
+      <span class="category"><%=group.memberships.count%>  <%= "member".pluralize(group.memberships.count) %> </span>
+      <% else %>
+         <span class="category">No members yet!</span>
+      <% end %>
+
     </div>
+ 
+  </div>
+  <div class="extra content">
+
+    <div class="right floated author">
+      <img class="ui avatar image" src="<%= group.user.profile_img_url %>"><%= group.user.full_name %>
+    </div>
+  </div>
+</div>
+</div>
+
 <% end %>
 
-
-        </div>
-    </div>
-</div>
 
 </div>

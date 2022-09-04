@@ -1,4 +1,5 @@
 class MembershipsController < ApplicationController
+    before_action :authenticate_user!
     def create
         group = Group.find(params[:group_id])
         membership = Membership.new(user:current_user, group: group)

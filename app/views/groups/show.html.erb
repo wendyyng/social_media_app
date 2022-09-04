@@ -1,63 +1,45 @@
-<div class="row ">
-  <div class="col-12 col-sm-6 col-md-8">
-  <div class="container">
 
-
-
-
-
-<div class="container" >
-<div class="card container card shadow p-3 mb-5 bg-white rounded" style="width: 40rem;">
-    <h1>Members:</h1>
-    <% if @members.present? %>
-        <% @members.each do |member| %>
-        <div><%= member.user.full_name %> </div>
-<button class="ui basic button"><i class="icon user"></i><%= link_to "Profile", user_path(member), style:"text-decoration: none; color: black" %></td>
-        <% end %>
-
-    <% end %>
-</div>
-</div>
-
-
-
-
-<% if @membership.present? %>
+            <% if @membership.present? %>
 <div class="container">
-<div class="container card shadow p-3 mb-5 bg-white rounded" style="width: 40rem;">
-    <h2>New Post</h2>
-        <%= form_with(model:[@group, @group_post]) do |f| %>
-         <div class="form-group">
-        <%= f.label :body %>
-        <br>
-        <%= f.rich_text_area :body, cols: 50, rows: 5, class:"form-control" %>
-        <br>
-        </div>
-         <div class="form-group">
-        <%= f.label :image %>
-        <br>
-        <%= f.file_field :image, class:"form-control" %> 
-         <%= content_tag(:i, nil, id: 'audio-record-button', class:'bi bi-mic microphone-icon') %>
-        <br>
-        </div>
-    <br>
-        <%= f.submit "Post", class:"ui primary button" %>
-    <br>
-    <% end %>
-</div>
-</div>
+    <div class="row">
+        <div class="col-8 col-md-8 col-sm-6">
+           <%# left starts %>
+           <%# left starts %>
+           <%# left starts %>
+           <%# left starts %>
+           <%# left starts %>
 
 
-    <div class="container">
+
+           <%# new post %>
+           <%# new post %>
+           <%# new post %>
+           <%# new post %>
+    <div class="container card shadow p-3 mb-5 bg-white rounded m-4" >
+                <h2>New Post</h2>
+                     <%= render "post_form" %>
+                <% end %>
+        </div>
+
+           <%# new post %>
+           <%# new post %>
+           <%# new post %>
+           <%# new post %>
+  <% if @membership.present? %>         
+ <div class="">
     <% @group_posts.each do |group_post| %>
-    <div class="card m-2 p-2 d-flex justify-content-around shadow p-3 mb-5 bg-white rounded" style="width: 40rem;">
+    <div class="container card shadow p-3 mb-5 bg-white rounded m-4" >
         <div class="ui comments">
         <div class="comment">
                 <a class="avatar">
-                <img src="https://i.pravatar.cc/">
+                <img src="<%= group_post.user.profile_img_url%>">
                 </a>
                 <div class="content">
-                <a class="author"><%= group_post.user.full_name%></a>
+                <a class="author">
+                <%= link_to user_path(group_post.user.id), class:"text-dark " do %>
+                <%= group_post.user.full_name%>
+                <% end %>
+                </a>
                 <div class="metadata">
                     <span class="date"><%= time_ago_in_words(group_post.created_at) %> ago</span>
                 </div>
@@ -69,7 +51,28 @@
              <%= link_to image_tag(group_post.image_as_thumbnail), group_post.image %>
         <% end %>
        <br>
-        <span><i class="thumbs up outline icon"></i></span>
+        <small>
+        <% like = group_post.likes.find_by(user: current_user) %>
+            <% if like.present? %>
+
+                <%= button_to "❤️", like_path(like), method: :delete, class:"ui icon button" %>
+                
+                <% elsif user_signed_in? %>
+               
+
+
+
+                <%= button_to "🤍", group_group_post_likes_path(@group.id, group_post.id), method: :post, class:"ui icon button" %>
+
+
+
+            <% end%>
+        </small>
+        <% if group_post.likes.present? %>
+        <span><%= group_post.likes.count%> <%= 'Like'.pluralize(group_post.likes.count) %></span>
+        <% else %>
+        <span>Be the first to like</span>
+        <% end %>
         </hr>
         </hr>
        
@@ -79,26 +82,30 @@
             
              <%= form_with(model:[@group, group_post, @comment]) do |f| %>
             <div class="form-group">
-             <%= f.label :Comment %>
+             <%= f.label "Leave a Comment" %>
              <br>
              <%= f.text_area :body, cols: 50, rows: 1, class:"form-control" %>
               <br>
              </div>
-          <%= f.submit "Comment", class:"ui primary button" %>
+          <%= f.submit "Post", class:"ui primary button" %>
 
             <div class="ui comments">
                
     <%# Comment Section starts%>
         <% if group_post.comments.any? %>
-            <h3 class="ui dividing header">Comments</h3>
+            <h3 class="ui dividing header"></h3>
              <% group_post.comments.each do |comment|%>
 
             <div class="comment">
                 <a class="avatar">
-                <img src="https://i.pravatar.cc/">
+                <img src="<%= comment.user.profile_img_url%>">
                 </a>
                 <div class="content">
-                <a class="author"><%= comment.user.full_name%></a>
+                <a class="author">
+                <%= link_to user_path(comment.user.id) do %>
+                <%= comment.user.full_name%></a>
+                <% end %>
+               
                 <div class="metadata">
                     <span class="date"><%= time_ago_in_words(comment.created_at) %> ago</span>
                 </div>
@@ -121,36 +128,172 @@
 </div>
 
 
-<% end%>
 
+
+       
+
+
+
+
+
+            <%# left ends %>
+            <%# left ends %>
+            <%# left ends %>
+            <%# left ends %>
+            <%# left ends %>
+        </div>
+        <div class="col-4 col-md-4 col-sm-6">
+           <%# right starts %>
+           <%# right starts %>
+           <%# right starts %>
+           <%# right starts %>
+           <%# right starts %>
+            <% if @membership.present? %>  
+        <%#---------- group info starts ---------%>
+        <div class="card container card shadow p-3 mb-5 bg-white rounded m-4" >
+         <img src="<%= @group.img_url %>" class="ui rounded image"/>
+            <h1><%= @group.title %></h1>
+            <p><%= @group.description %></p>
+            <p>Created by <%= @group.user.full_name %></p>
+    
+            <% if @group.address? %>
+            <span><i class="map pin icon"></i><%= @group.address.capitalize() %></span>
+            <% end %>
+            <br>
+            <p><%= @group.memberships.count %>  <%= "member".pluralize(@group.memberships.count) %>  ·
+ 
+            <%= @group.group_posts.count %> <%= "post".pluralize(@group.group_posts.count) %>
+            </p>
+            <small>
+            <% if @membership.present? %>
+                <%= button_to "Leave Group", membership_path(@membership), method: :delete, class:"ui red button p-3" %>
+                <% elsif user_signed_in? %>
+                <%= button_to "Join Group", group_memberships_path(@group), method: :post, class:"ui button p-3" %>
+            <% end%>
+            </small>
+            <% if @group.user == current_user %>
+            <br>
+            <small><%= link_to "Edit Group", edit_group_path(@group), class:"ui button p-3" %></small>
+            <% end %>
+
+        </div>
+        <%# --------group info ends ----------%>
+        <%# --------map starts----------%>
+        <% if @group.longitude && current_user.longitude %>
+        <div class="card container card shadow p-3 mb-5 bg-white rounded m-4 justify-content-center align-items-center" >
+            <h1>Location</h1>
+            <p><%= number_with_delimiter(@distance, :delimiter => ',') %> km away from your current location</p>
+            <div >
+            <div id="map" style='width: 18em; height: 12em;'></div>
+            </div>
+        </div>
+        <% end %>
+           <%# --------map ends----------%>
+        <% end %>
+         <% if @membership.present? %>  
+        <%# --------members start ----------%>
+        <div class="card container card shadow p-3 mb-5 bg-white rounded m-4" >
+
+            <h1>Members:</h1>
+            <% if @members.present? %>
+                <div class="ui comments">
+                <% @members.each do |member| %>
+                    <div class="comment">
+                        <a class="avatar">
+                        <img src="<%= member.user.profile_img_url %>">
+                        </a>
+                        <div class="content">
+                        <a class="author">
+                    <%= link_to user_path(member.user), class:"text-dark " do %>
+                        <%= member.user.full_name%>
+                    <% end %>
+                        </a>
+                        <div class="text">
+                        <%= member.created_at.strftime("Joined %B %Y") %>
+                        </div>
+                        </div>
+                    </div>
+                   
+                <% end %>
+                 </div>
+            <% end %>
+        
+        
+        </div>
+        <% end %>
+            <%# --------members ends ----------%>
+
+
+
+            <%# right ends %>
+            <%# right ends %>
+            <%# right ends %>
+            <%# right ends %>
+            <%# right ends %>
+        </div>
+    </div>
 </div>
 
+<%# If user is not a member %>
+<% else %>
+        <div class="container">
+        <div class="container justify-content-center align-items-center">
+        <div class="card container card shadow p-5 mb-5 bg-white rounded m-4 justify-content-center align-items-center">
+            <div class="content">
+            <img src="<%= @group.img_url %>" class="ui rounded image"/>
+          
+            <h1><%= @group.title %></h1>
+            <p><%= @group.description %></p>
+            <p>Created by <%= @group.user.full_name %></p>
+            <p><%= @group.memberships.count %>  <%= "member".pluralize(@group.memberships.count) %>  ·
+ 
+            <%= @group.group_posts.count %> <%= "post".pluralize(@group.group_posts.count) %>
+            </p>
+            <% if @group.address %>
+            <span><i class="map pin icon"></i><%= @group.address.capitalize() %></span>
+            <br><br>
+            <% if current_user.longitude %>
+             <p><%= number_with_delimiter(@distance, :delimiter => ',') %> km away from your current location</p>
+            <% end %>
+            <% end %>
+            <br>
+            <small>
+            <% if @membership.present? %>
+                <%= button_to "Leave Group", membership_path(@membership), method: :delete, class:"ui red button p-3" %>
+                <% elsif user_signed_in? %>
+                <%= button_to "Join Group", group_memberships_path(@group), method: :post, class:"ui button btn btn-dark  p-3 mt-2" %>
+            <% end%>
+            </small>
+
+            </div>
+        </div>
+        </div>
+        </div>
 
 
-  </div>
+<% end %>
 
 
-  
-  <div class="col-2 col-md-4">
-  <div class="container card m-4 shadow p-3 mb-5 bg-white rounded">
-    <h2><%= @group.title %></h2>
-    <p><%= @group.description %></p>
-    <p>Admin: <%= @group.user.first_name %></p>
-    <span><i class="map pin icon"></i>Vancouver BC, Canada</span>
-    <br>
-     <small>
-      <% if @membership.present? %>
-         <%= button_to "Leave Group", membership_path(@membership), method: :delete, class:"ui red button btn btn-danger text-uppercase p-3" %>
-         <% elsif user_signed_in? %>
-        <%= button_to "Join Group", group_memberships_path(@group), method: :post, class:"btn btn-dark text-uppercase p-3" %>
-     <% end%>
-    </small>
+<script>
+    //This is to create the map
+    //see this documentation: https://github.com/apneadiving/Google-Maps-for-Rails
 
-</div>
-  </div>
-</div>
-
-
-
-
+    handler = Gmaps.build('Google');
+    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+    markers = handler.addMarkers([
+        {
+        "lat": <%= @group.latitude %>, 
+        "lng": <%= @group.longitude %>,  
+        "picture": {
+            "width":  2,
+            "height": 2
+        },
+        "infowindow": "<%= @group.address %>"
+        }
+    ]);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+    handler.getMap().setZoom(8); //we are adding this to zoom in a bit
+});
+</script>
 

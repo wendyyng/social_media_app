@@ -6,6 +6,15 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
+
+Rails.application.eager_load!
+ActiveRecord::Base.connection.disable_referential_integrity do
+  ApplicationRecord.descendants.each do |model|
+    model.delete_all
+  end
+end
+
+
 Comment.destroy_all
 GroupPost.destroy_all
 Group.destroy_all
@@ -45,7 +54,9 @@ users = User.all
       )
 
     if g.valid?
+      Membership.new(user:super_user, group: g)
         rand(1..3).times do
+          Membership.new(user:users.sample, group: g)
           gp = GroupPost.create(body: Faker::Hipster.sentence, user: users.sample, group: g)
           if gp.valid?
             rand(1..3).times do
