@@ -3,8 +3,36 @@
 
     <section class="hero d-flex align-items-center flex-column p-5" alt="Photo by Helena Lopes: https://www.pexels.com/photo/group-of-people-having-fun-together-under-the-sun-708392/">
         
-        <h1 id="hero-main-text" class="text-dark mb-4">Join groups and connect with new friends!</h1>
-        <p id="hero-secondary-text" class="text-dark m-2"><%= @group_count %> groups & <%= @event_count %> meetups have been created and <%= @user_count %> people have joined FriendMe<i class="child icon"></i></p>
+        <h1 id="hero-main-text" class="text-dark mb-4">Join groups and connect with new friends! <i class="child icon"></i></h1>
+        
+        <div class="ui statistics">
+            <div class="statistic">
+                <div class="value">
+                <%= @group_count %>
+                </div>
+                <div class="label">
+                Groups
+                </div>
+            </div>
+            <div class="statistic">
+                <div class="value">
+                <%= @event_count %>
+                </div>
+                <div class="label">
+                Events
+                </div>
+            </div>
+            <div class="statistic">
+                <div class="value">
+                <%= @user_count %>
+                </div>
+                <div class="label">
+                Users
+                </div>
+            </div>
+            </div>
+        
+        
         <% if !user_signed_in? %>
         <a class="ui button secondary mt-2" href="<%= new_user_path %>">Sign Up Now!</a>
         <% end %>

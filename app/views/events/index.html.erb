@@ -7,7 +7,7 @@
 <div class="ui card" href="" style="height: 30em">
   <div class="content">
     <h4 class="ui">
-  <img href="<%= event_path(event)%>" src="https://media.istockphoto.com/photos/business-people-having-a-meeting-picture-id1015934018?k=20&m=1015934018&s=612x612&w=0&h=9Q6gt-coI62h0uqok1FReHMhN_-M7ZhvyrTxNdEqGgg=" class="ui rounded image">
+  <img href="<%= event_path(event)%>" src="<%= event.img_url %>" class="ui rounded image">
   <p class="text-dark mt-2" ><%= link_to event.title, event_path(event), style:"text-decoration: none; color: black" %></p>          
 </h4>
     <div class="meta">

@@ -6,7 +6,7 @@
            <%# left starts %>
            <%# left starts %>
            <%# left starts %>
-           <div class="card container card shadow p-3 mb-5 bg-white rounded m-4 flex justify-content-center align-items-center" >
+           <div class="card container card shadow p-3 bg-white rounded m-4 flex justify-content-center align-items-center" >
           <h1>Your Friends:</h1>
           <% if current_user.friends.count > 0 %>
 
@@ -18,7 +18,7 @@
             <% current_user.friends.each do |friend| %>
               <div class="card">
               <div class="image">
-                <img src="https://semantic-ui.com/images/avatar2/large/elyse.png">
+                <img src="<%= friend.profile_img_url %>">
               </div>
               <div class="content">
                 <div class="header"><%= link_to friend.full_name, user_path(friend), style:"text-decoration: none; color: black" %></div>
@@ -105,14 +105,15 @@
   <div class="card container card shadow p-3 mb-5 bg-white rounded m-4 flex justify-content-center align-items-center" >
     <h1>Your Events:</h1>
     <div class="ui cards flex justify-content-center align-items-center">
-      <% @organized_events.each do |event|%>
+      <% @organized_events.order(date: :asc).each do |event|%>
 
-       <div class="card" >
+       <div class="card p-1" style="height: 8em">
               <div class="content">
                 <div class="header">
-                <p><%= link_to event.title, event_path(event), style:"text-decoration: none; color: black" %></p></div>
-                      <div class="description">
+                <p>Meetup: <%= link_to event.title, event_path(event), style:"text-decoration: none; color: black" %></p></div>
+                  <div class="description">
                   <%= event.description %>
+                  <h6>Event Date: <%= event.date.strftime("%Y-%m-%d %I:%M") %></h6>
                 </div>
               </div>
           </div>
@@ -157,19 +158,19 @@
                             <button class="primary basic button ui mb-1" style="width: 12em">
                                 <%= link_to 'Update Profile', edit_user_path(current_user) %>
                               </button>
-                             <br>
+                             
                             <button class="primary basic button ui mb-1" style="width: 12em">
                                 <%= link_to 'Create New Post', new_post_path %>
                               </button>
-                            <br>
+                          
                             <button class="primary basic button ui mb-1" style="width: 12em">
                                 <%= link_to 'Create Group', new_group_path %>
                               </button>
-                             <br> 
+                           
                             <button class="primary basic button ui" style="width: 12em">
                                 <%= link_to 'Create Meetup', new_event_path %>
                               </button>
-                              <br>
+                          
              
           </div>
           </div>
