@@ -216,7 +216,8 @@
                 <div class="content">
                   <img class="right floated mini ui image" src="<%= invitation.user.profile_img_url %>">
                   <div class="header">
-                    <%= User.find(invitation.user_id).full_name %>
+                   
+                    <%= link_to User.find(invitation.user_id).full_name, user_path(User.find(invitation.user_id)), style:"text-decoration: none; color: black" %>
                   </div>
                   <div class="description">
                   Received <%= time_ago_in_words(invitation.created_at) %>  ago
@@ -254,6 +255,7 @@
           <% @sent_requests.where(confirmed: false).each do |invitation|%>
           <div class="card">
             <div class="content">
+            <img class="right floated mini ui image" src="<%= User.find(invitation.friend_id).profile_img_url %>">
               <div class="header"><%= User.find(invitation.friend_id).full_name %></div>
               <div class="description">
               Sent

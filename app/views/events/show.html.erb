@@ -31,8 +31,8 @@
             <% end %>
 
             <% if current_user && current_user == @event.organizer %>
-                <div class="mb-1"><%= link_to "Edit Event", edit_event_path(@event.id), class:"ui button" %></div>
-                <div><%= link_to "Delete Event", event_path(@event.id), method: :delete, class:"ui button" %></div>
+                <div class="my-1"><%= link_to "Edit Event", edit_event_path(@event.id), class:"ui button" %></div>
+                
             <% end %>
         </div>
             <%# left ends %>

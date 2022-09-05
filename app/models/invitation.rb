@@ -1,5 +1,20 @@
 class Invitation < ApplicationRecord
     belongs_to :user
+
+    validates(
+      :user_id,
+      uniqueness:{
+        scope: :friend_id,
+        message: "invitation has already been sent"
+      }
+    )
+    validates(
+      :friend_id,
+      uniqueness:{
+        scope: :user_id,
+        message: "invitation has already been sent"
+      }
+    )
   
     def self.reacted?(id1, id2)
       case1 = !Invitation.where(user_id: id1, friend_id: id2).empty?

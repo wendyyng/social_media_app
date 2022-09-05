@@ -15,14 +15,17 @@ class InvitationsController < ApplicationController
   
     def destroy
       invitation = Invitation.find(params[:invitation_id])
-      invitation.destroy
+      if invitation.destroy
+        flash[:notice]= "Invitation deleted successfully!"
+      end
       redirect_to show_user_panel_path
-      # flash[:notice]= "Unsent successfully!"
     end
 
     def destroy_from_panel
       invitation = Invitation.find(params[:invitation_id])
-      invitation.destroy
+      if invitation.destroy
+        flash[:notice]= "Invitation deleted successfully!"
+      end
       redirect_to show_user_panel_path
     end
   
@@ -36,7 +39,9 @@ class InvitationsController < ApplicationController
 
     def unsent
       invitation = Invitation.find(params[:invitation_id])
-      invitation.destroy
+      if invitation.destroy
+        flash[:notice]= "Invitation deleted successfully!"
+      end
       # redirect_to show_user_panel_path(current_user.id)
       redirect_to show_user_panel_path
     end

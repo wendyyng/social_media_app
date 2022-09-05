@@ -56,8 +56,8 @@
                         </div>
                           </div>
 
-                          
-                          <% if  @user.posts.any? &&  @user.friend_with?(current_user) || current_user == @user %>
+                          <% if  @user.posts.any?%>
+                          <% if  @user.friend_with?(current_user) || current_user == @user %>
                           <hr>
                            <div class="container px-4">
                            <h1 >Posts</h1>
@@ -91,6 +91,7 @@
                            <% end %>
                            </div>
                            </div>
+                           <% end %>
                            <% end %>
 <%# ---------------------------------------------------------- %>
                    
