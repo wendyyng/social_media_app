@@ -4,7 +4,7 @@
 <div class="container d-flex flex-wrap justify-content-center align-items-center mt-5">
 <div class="ui link cards flex justify-content-center align-items-start m-4">
 <% @events.each do |event| %>
-<div class="ui card" href="" style="height: 30em">
+<div class="ui card" href="" style="height: 28em">
   <div class="content">
     <h4 class="ui">
   <img href="<%= event_path(event)%>" src="<%= event.img_url %>" class="ui rounded image">
@@ -21,7 +21,7 @@
   <div class="extra content">
 
     <div class="right floated author">
-      <img class="ui avatar image" src="https://semantic-ui.com/images/avatar2/large/molly.png"><%= event.organizer.full_name %>
+      <img class="ui avatar image" src="<%= event.organizer.profile_img_url %>"><%= event.organizer.full_name %>
     </div>
   </div>
 </div>

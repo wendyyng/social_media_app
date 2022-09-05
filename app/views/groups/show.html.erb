@@ -16,6 +16,7 @@
            <%# new post %>
            <%# new post %>
     <div class="container card shadow p-3 mb-5 bg-white rounded m-4" >
+    
                 <h2>New Post</h2>
                      <%= render "post_form" %>
                 <% end %>
@@ -236,9 +237,9 @@
 
 <%# If user is not a member %>
 <% else %>
-        <div class="container">
-        <div class="container justify-content-center align-items-center">
-        <div class="card container card shadow p-5 mb-5 bg-white rounded m-4 justify-content-center align-items-center">
+        
+       <div class="container justify-content-center align-items-center d-flex">
+        <div class="card container card shadow p-3 mb-5 bg-white rounded m-4" style="width: 40em">
             <div class="content">
             <img src="<%= @group.img_url %>" class="ui rounded image"/>
           
@@ -256,7 +257,7 @@
              <p><%= number_with_delimiter(@distance, :delimiter => ',') %> km away from your current location</p>
             <% end %>
             <% end %>
-            <br>
+           
             <small>
             <% if @membership.present? %>
                 <%= button_to "Leave Group", membership_path(@membership), method: :delete, class:"ui red button p-3" %>
@@ -268,7 +269,8 @@
             </div>
         </div>
         </div>
-        </div>
+     
+       
 
 
 <% end %>

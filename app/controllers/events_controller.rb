@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+    before_action :authenticate_user!
+
     def index
         @events = Event.future.order(created_at: :desc)
     end
@@ -21,7 +23,7 @@ class EventsController < ApplicationController
             flash[:notice]= "Event created successfully!"
             redirect_to event_path(@event)
         else
-            flash[:error] = "Invalid Event"
+            flash[:error] = "Invalid Event!"
             render :new
         end
     end
@@ -43,7 +45,7 @@ class EventsController < ApplicationController
     private
 
     def event_params
-        params.require(:event).permit(:title, :description, :date, :location, )
+        params.require(:event).permit(:title, :description, :date, :location, :img_url)
     end
 
     def event_user_distance_km(event, user)

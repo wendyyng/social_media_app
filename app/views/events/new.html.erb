@@ -10,6 +10,9 @@
             <div class="card-body px-5 pt-5">
                     <div class="form-outline mb-4">
                         <h1>Create a New Event</h1>
+                         <% if @event.errors.any? %>
+                        <p> <%= @event.errors.full_messages.join(',') %> </p>
+                    <% end %>
 
                         <%= render "form" %>
 

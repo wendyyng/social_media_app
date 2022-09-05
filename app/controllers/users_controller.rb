@@ -30,15 +30,11 @@ class UsersController < ApplicationController
     end
 
     def user_panel
-      @received_requests = current_user.pending_invitations
-      @sent_requests = current_user.invitations
-      @friends = current_user.friends
-      @attended_events = current_user.attended_events
-      @organized_events = Event.where(organizer: current_user)
-    end
-
-    def show_attended_events
-        @attended_events = current_user.attended_events
+        @received_requests = current_user.pending_invitations
+        @sent_requests = current_user.invitations
+        @friends = current_user.friends
+        @organized_events = Event.where(organizer: current_user)
+        @upcoming_events = current_user.attended_events
     end
 
     def edit

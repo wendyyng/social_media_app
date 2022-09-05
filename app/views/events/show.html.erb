@@ -2,15 +2,16 @@
     <div class="row">
         <div class="col-8 col-md-8 col-sm-6">
            <%# left starts %>
-         <div class="container card shadow p-3 mb-5 bg-white rounded m-4" >
+         <div class="container card shadow p-5 mb-5 bg-white rounded m-4" >
             <h1>Meetup: <%= @event.title %></h1>
+            <img href="<%= event_path(@event)%>" src="<%= @event.img_url %>" class="ui rounded image" style="width: 30em">
             <p>Description: <%= @event.description %></p>
             <p>Date: <%= @event.date %></p>
             <p>Organizer: <%= @event.organizer.full_name %></p>
             <p>Location: <%= @event.location %></p>
 
 
-            <% if @event.longitude%>
+            <% if @event.longitude %>
               <h1>Location</h1>
               <% if current_user.longitude %>
             <p><%= number_with_delimiter(@distance, :delimiter => ',') %> km away from your current location</p>
@@ -43,14 +44,14 @@
          <div class="container card shadow p-3 mb-5 bg-white rounded m-4" >
             <h1>Attendees:</h1>
             <%# --------attendees start ----------%>
-            <div class="card container p-2" >
+            <div class=" container p-2" >
                 <div class="ui comments">
 
                 <% if @event.attendees.each do |attendee| %>  
 
                     <div class="comment m-1">
                         <a class="avatar">
-                            <img src="https://i.pravatar.cc/">
+                            <img src="<%= attendee.profile_img_url %>">
                         </a>
                         <div class="content">
                             <a class="author">

@@ -11,12 +11,12 @@
                     
  <%# ----------------------------------------------------%>
                         <div class="container justify-content-center align-items-center d-flex flex-column">
-                        <h1><%= link_to @user.first_name, user_path(@user), style:"text-decoration: none; color: black" %><h1>
+                        <h1 class="m-0"><%= link_to @user.first_name, user_path(@user), style:"text-decoration: none; color: black" %><h1>
 
                           <%   if @user.image.attached? && @user.image.content_type.in?(%w[image/jpeg image/png image/gif])%>
                                   <%= link_to image_tag(@user.image_as_thumbnail), @user.image %>
                                   <% else %>
-                          <div class="image mb-2 ">
+                          <div class="image mb-3 ">
                           <img src="<%= @user.profile_img_url %>" style="width: 5em"class="rounded"/>
                             </div>
                           <% end %>
@@ -37,10 +37,11 @@
                         
                         
                         <h3>Friends of <strong> <%= @user.full_name %> </strong> </h3>
+                        <div>
                         <% if @user.friends.any? %>
                         
                           <% @user.friends.each do |friend| %>
-                              <div class="my-2"><i class="user icon"></i><%= link_to friend.first_name, user_path(friend), style:"text-decoration: none; color: black" %>
+                              <div class="mx-5 my-2"><i class="user icon"></i><%= link_to friend.first_name, user_path(friend), style:"text-decoration: none; color: black" %>
                               <% if @user == current_user %>
                                 <%= link_to 'Unfriend',
                                 invitations_destroy_path(invitation_id: Invitation.find_invitation(@user.id, friend.id)), class:"ui button compact mx-2"  %>
@@ -52,7 +53,8 @@
                         <% else %>
                         <p>The user has no friends!</p>
                         <% end %>
-                           </div>
+                        </div>
+                          </div>
 
                           
                           <% if  @user.posts.any? &&  @user.friend_with?(current_user) || current_user == @user %>
@@ -78,7 +80,7 @@
                                 
                                   <%   if post.image.attached? %>
 
-                                 <div class="extra images">
+                                 <div class="images">
                                   <a><%= image_tag(post.image_as_thumbnail) %></a>
                                 </div>
                                 <% end %>

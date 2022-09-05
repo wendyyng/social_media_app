@@ -2,11 +2,16 @@ class MembershipsController < ApplicationController
     before_action :authenticate_user!
     def create
         group = Group.find(params[:group_id])
-        membership = Membership.new(user:current_user, group: group)
-        if membership.save
-            flash[:notice] = "Congrats, you have joined the group!"
-         else
-             flash[:alert] = membership.errors.full_messages.join(', ')
+
+        if Membership.where(user: current_user, group: group).any?
+            flash[:alert] = "You have already joined the group!"
+        else
+            membership = Membership.new(user:current_user, group: group)
+            if membership.save
+                flash[:notice] = "Congrats, you have joined the group!"
+            else
+                flash[:alert] = membership.errors.full_messages.join(', ')
+            end
         end
         redirect_to group_path(group)
     end

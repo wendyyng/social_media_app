@@ -14,15 +14,15 @@
 
 
 
-          <div class="ui link cards flex justify-content-center align-items-center">
+          <div class="ui link cards flex justify-content-center flex-wrap">
             <% current_user.friends.each do |friend| %>
-              <div class="card">
+              <div class="card" style="width: 13em">
               <div class="image">
                 <img src="<%= friend.profile_img_url %>">
               </div>
               <div class="content">
-                <div class="header"><%= link_to friend.full_name, user_path(friend), style:"text-decoration: none; color: black" %></div>
-                <div class="description">
+                <div class="header justify-content-center d-flex"><%= link_to friend.full_name, user_path(friend), style:"text-decoration: none; color: black" %></div>
+                <div class="description justify-content-center d-flex">
                 <button class="ui button">
                   <%= link_to 'Unfriend',
                   invitations_destroy_from_panel_path(invitation_id: Invitation.find_invitation(current_user.id, friend.id)), class:"text-black"  %>
@@ -30,9 +30,6 @@
                 </div>
               </div>
               <div class="extra content">
-                <span class="right floated">
-                  <%= friend.created_at.strftime("Joined in %B %Y") %>
-                </span>
                   <% if friend.friends.count > 0 %>
                 <span>
                   <i class="user icon"></i>
@@ -102,8 +99,37 @@
            </div>
            <% end %>
 
+
+<% if @upcoming_events %>
+ <div class="card container card shadow p-3 mb-5 bg-white rounded m-4 flex justify-content-center align-items-center" >
+    <h1>Upcoming Events:</h1>
+    <div class="ui cards flex justify-content-center align-items-center">
+      <% @upcoming_events.order(date: :asc).each do |event|%>
+
+       <div class="card p-1" style="height: 8em">
+              <div class="content">
+                <div class="header">
+                <p>Meetup: <%= link_to event.title, event_path(event), style:"text-decoration: none; color: black" %></p></div>
+                  <div class="description">
+                  <%= event.description %>
+                  <h6>Event Date: <%= event.date.strftime("%Y-%m-%d %I:%M") %></h6>
+                </div>
+              </div>
+          </div>
+
+    <% end %>
+    </div>
+  </div>
+<% end %>
+
+
+
+
+
+
+<% if @organized_events.any? %>
   <div class="card container card shadow p-3 mb-5 bg-white rounded m-4 flex justify-content-center align-items-center" >
-    <h1>Your Events:</h1>
+    <h1>Events You Created:</h1>
     <div class="ui cards flex justify-content-center align-items-center">
       <% @organized_events.order(date: :asc).each do |event|%>
 
@@ -121,13 +147,9 @@
     <% end %>
     </div>
   </div>
+<% end %>
 
 
-
-            <%# left ends %>
-            <%# left ends %>
-            <%# left ends %>
-            <%# left ends %>
             <%# left ends %>
         </div>
         <div class="col-4 col-md-4 col-sm-6">
@@ -239,7 +261,7 @@
               </div>
             </div>
             <div class="ui bottom attached button">
-              <%= link_to 'Unsend Invitation', invitations_unsent_path(invitation_id: invitation.id) %>
+              <%= link_to 'Unsend Invitation', invitations_unsent_path(invitation_id: invitation.id), class:"text-dark" %>
             </div>
           </div>
       <% end %>
