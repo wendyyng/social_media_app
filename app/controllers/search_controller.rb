@@ -10,5 +10,6 @@ class SearchController < ApplicationController
       else
         redirect_to groups_path
       end
-    end
+  end
+  
 end

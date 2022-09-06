@@ -1,19 +1,8 @@
-
-            <% if @membership.present? %>
+<% if @membership.present? %>
 <div class="container">
     <div class="row">
         <div class="col-8 col-md-8 col-sm-6">
            <%# left starts %>
-           <%# left starts %>
-           <%# left starts %>
-           <%# left starts %>
-           <%# left starts %>
-
-
-
-           <%# new post %>
-           <%# new post %>
-           <%# new post %>
            <%# new post %>
     <div class="container card shadow p-3 mb-5 bg-white rounded m-4" >
     
@@ -21,10 +10,6 @@
                      <%= render "post_form" %>
                 <% end %>
         </div>
-
-           <%# new post %>
-           <%# new post %>
-           <%# new post %>
            <%# new post %>
   <% if @membership.present? %>         
  <div class="">
@@ -55,18 +40,9 @@
         <small>
         <% like = group_post.likes.find_by(user: current_user) %>
             <% if like.present? %>
-
                 <%= button_to "❤️", like_path(like), method: :delete, class:"ui icon button" %>
-                
                 <% elsif user_signed_in? %>
-               
-
-
-
                 <%= button_to "🤍", group_group_post_likes_path(@group.id, group_post.id), method: :post, class:"ui icon button" %>
-
-
-
             <% end%>
         </small>
         <% if group_post.likes.present? %>
@@ -76,11 +52,7 @@
         <% end %>
         </hr>
         </hr>
-       
-
-
         <div>
-            
              <%= form_with(model:[@group, group_post, @comment]) do |f| %>
             <div class="form-group">
              <%= f.label "Leave a Comment" %>
@@ -91,7 +63,6 @@
           <%= f.submit "Post", class:"ui primary button" %>
 
             <div class="ui comments">
-               
     <%# Comment Section starts%>
         <% if group_post.comments.any? %>
             <h3 class="ui dividing header"></h3>
@@ -106,7 +77,6 @@
                 <%= link_to user_path(comment.user.id) do %>
                 <%= comment.user.full_name%></a>
                 <% end %>
-               
                 <div class="metadata">
                     <span class="date"><%= time_ago_in_words(comment.created_at) %> ago</span>
                 </div>
@@ -118,36 +88,15 @@
             <% end %>
         <% end %>
     <%# Comment Section ends %>
-
-
-
 </div>
     <% end %>
         </div>
     </div>
 <% end %>
 </div>
-
-
-
-
-       
-
-
-
-
-
             <%# left ends %>
-            <%# left ends %>
-            <%# left ends %>
-            <%# left ends %>
-            <%# left ends %>
-        </div>
+            </div>
         <div class="col-4 col-md-4 col-sm-6">
-           <%# right starts %>
-           <%# right starts %>
-           <%# right starts %>
-           <%# right starts %>
            <%# right starts %>
             <% if @membership.present? %>  
         <%#---------- group info starts ---------%>
@@ -214,22 +163,12 @@
                         </div>
                         </div>
                     </div>
-                   
                 <% end %>
                  </div>
             <% end %>
-        
-        
         </div>
         <% end %>
             <%# --------members ends ----------%>
-
-
-
-            <%# right ends %>
-            <%# right ends %>
-            <%# right ends %>
-            <%# right ends %>
             <%# right ends %>
         </div>
     </div>
@@ -257,7 +196,6 @@
              <p><%= number_with_delimiter(@distance, :delimiter => ',') %> km away from your current location</p>
             <% end %>
             <% end %>
-           
             <small>
             <% if @membership.present? %>
                 <%= button_to "Leave Group", membership_path(@membership), method: :delete, class:"ui red button p-3" %>
@@ -265,14 +203,9 @@
                 <%= button_to "Join Group", group_memberships_path(@group), method: :post, class:"ui button btn btn-dark  p-3 mt-2" %>
             <% end%>
             </small>
-
             </div>
         </div>
         </div>
-     
-       
-
-
 <% end %>
 
 

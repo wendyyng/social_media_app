@@ -6,9 +6,6 @@
             </div>
             <div class="content">
               <div class="header"><%= link_to user.full_name, user_path(user), style:"text-decoration: none; color: black" %></div>
-              <%# <div class="meta">
-                <a>Friends</a>
-              </div> %>
             </div>
             <div class="extra content">
               <span class="right floated">
@@ -22,9 +19,6 @@
               </span>
               <% end %>
             </div>
-
-
-
             <% if current_user && !Invitation.reacted?(current_user.id, user.id) && current_user != user %>
             <div class="ui bottom attached button">
             <i class="add icon"></i>
@@ -32,34 +26,11 @@
             invitations_create_path(ids: {id1: current_user.id, id2: user.id}), method: :post, class:"text-black" %>
           </div>
            <% end %>
-
-
-
           <% if current_user.is_admin %>
             <div class="ui bottom attached button">
-           
-            
             <%= link_to 'Edit', edit_user_path(user), class:"text-black" %>
           </div>
-
-    
-
-
-
           <% end %>
           </div>
-
-    
     <% end %>
-
  </div>
-
-
-
-
-
-
-
-
-
-<%# </div> %>

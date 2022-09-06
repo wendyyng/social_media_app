@@ -42,13 +42,17 @@ class EventsController < ApplicationController
 
     end
 
-    # def destroy
-    #     @event = Event.find params[:id]
-    #     if @event.destroy
-    #         flash[:notice]= "Event has been deleted!"
-    #     end
-    #     redirect_to events_path
-    # end
+    def destroy
+        @event = Event.find params[:id]
+        
+        if @event.destroy
+            flash[:notice]= "Event has been deleted!!"
+            redirect_to events_path
+        else
+            flash[:notice]= "Can't delete event!!"
+            redirect_to event_path(@event)
+        end
+    end
 
     private
 
@@ -88,5 +92,5 @@ class EventsController < ApplicationController
   
         end
         
-      end
+    end
 end

@@ -1,7 +1,4 @@
-
-<section class="bg-image"
-  >
-  
+<section class="bg-image">
   <div class="mask d-flex align-items-center h-100 gradient-custom-3 pb-0">
     <div class="container h-100 pb-0">
       <div class="container row d-flex justify-content-center align-items-center h-100 pb-0">
@@ -13,11 +10,8 @@
                          <% if @event.errors.any? %>
                         <p> <%= @event.errors.full_messages.join(',') %> </p>
                     <% end %>
-
                         <%= render "form" %>
-
                     </div>
-            
             </div>
           </div>
         </div>

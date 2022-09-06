@@ -10,11 +10,11 @@ class GroupPostsController < ApplicationController
         @group_post.user = current_user
         @group_post.group = @group
         if @group_post.save
-            flash[:notice]= "Group created successfully!"
-            redirect_to group_path(@group)
+            flash[:notice]= "Group created successfully!" 
         else
             @group_posts = @group.group_posts.order(created_at: :desc)
-            render '/groups/show', status: 303
+            flash[:error] = "Invalid Group Post"
         end
+        redirect_to group_path(@group)
     end
 end

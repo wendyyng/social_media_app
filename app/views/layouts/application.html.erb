@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
       <!-- Bootstrap -->
@@ -32,17 +31,8 @@
   background-size: cover;
 }
 
-footer {
-    /* background-color: #1f2937; */
-    background-color: black;
-    color: #F9FAF8;
-}
-
 body, .hero {
-
 height: 100%;
-
-
 }
 
 #hero-main-text {
@@ -53,8 +43,9 @@ height: 100%;
   font-size: 1.12em
 }
 
-/*Footer*/
 footer {
+    background-color: black;
+    color: #F9FAF8;
     height: 3em;
     text-align: center;
     padding: 1em;
@@ -66,24 +57,15 @@ footer {
 }
 </style>
 
-
-
-
    <div class="container-fluid" id="banner">
         <nav class="navbar navbar-expand-lg navbar-light">
            <div class="container-fluid d-flex p-0">
-
             <div class="container">
-
               <a class="navbar-brand fw-bold fw-bold primary" href="<%= root_path %>">FriendMe<i class="child icon"></i></a>
-
             </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navtoggler" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="box-shadow: none !important;">
             <span class="navbar-toggler-icon"></span>
             </button>
-
-
-
             <div class="collapse navbar-collapse" id="navtoggler" >
             <%# Search bar %>
             <div class="container mr-5" style="width: 30em">
@@ -110,26 +92,16 @@ footer {
                     </div>
                   </div>
                 </li>
-                
-
-
-
-
                 <li class="nav-item m-1">
                  <div class="ui compact menu" style="position: relative; border: none !important">
                     <a class="item" href="<%= show_user_panel_path %>">
                       <i class="icon users"></i>
-
-
                       <% if current_user.pending_invitations.count > 0 %>
                       <div class="floating ui teal label"><%=current_user.pending_invitations.count %></div>
                       <% end %>
-
-
                     </a>
                   </div>
                 </li>
-
               <li class="nav-item m-1 ms-2">
                 <%= button_to "Log out", sessions_path, method: :delete, class: "ui primary button" %>
               </li>
@@ -147,7 +119,6 @@ footer {
           </div>
         </nav>
       </div>
-
       <div class="d-flex flex-row-reverse">
     <% flash.each do |type, message| %>
       <div class="ui floating message alert alert-success alert-dismissible" role="alert">
@@ -158,8 +129,6 @@ footer {
     <% end %> 
     </div>
    
-
-
     <%= yield %>
 
      <!-- JavaScript Bundle with Popper -->

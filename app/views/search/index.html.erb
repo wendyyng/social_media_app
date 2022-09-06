@@ -1,41 +1,32 @@
 <div class="container " style="min-height: 100%">
-
-<h1 class="text-center my-5"><%= pluralize(@groups.count, "Result") %> with "<%= @keyword %>"</h1>
-
-
-<div class="container d-flex flex-wrap">
-<% @groups.each do |group| %>
-<div class=" m-2  d-flex justify-content-around align-items-left" >
-<div class="ui card" style="width: 20rem;">
-  <div class="content">
-    <h4 class="ui">
-  <img src="<%= group.img_url %>" class="ui rounded image">
-
- <p class="text-dark mt-2" ><%= link_to group.title, group_path(group), style:"text-decoration: none; color: black" %></p>
-            
-</h4>
-    <div class="meta">
-
-      <% if group.memberships.count > 0 %>
-      <span class="category"><%=group.memberships.count%>  <%= "member".pluralize(group.memberships.count) %> </span>
-      <% else %>
-         <span class="category">No members yet!</span>
-      <% end %>
-
+  <h1 class="text-center my-5"><%= pluralize(@groups.count, "Result") %> with "<%= @keyword %>"</h1>
+  <div class="container d-flex flex-wrap">
+  <% @groups.each do |group| %>
+  <div class=" m-2  d-flex justify-content-around align-items-left" >
+  <div class="ui card" style="width: 20rem;">
+    <div class="content">
+      <h4 class="ui">
+    <img src="<%= group.img_url %>" class="ui rounded image">
+  <p class="text-dark mt-2" ><%= link_to group.title, group_path(group), style:"text-decoration: none; color: black" %></p>
+  </h4>
+      <div class="meta">
+        <% if group.memberships.count > 0 %>
+        <span class="category"><%=group.memberships.count%>  <%= "member".pluralize(group.memberships.count) %> </span>
+        <% else %>
+          <span class="category">No members yet!</span>
+        <% end %>
+      </div>
     </div>
- 
+    <div class="extra content">
+  <div class="left floated ">
+  <p><i class="map pin icon"></i><%= group.address %></p>
   </div>
-  <div class="extra content">
-<div class="left floated ">
-<p><i class="map pin icon"></i><%= group.address %></p>
-</div>
-    <div class="right floated author">
-      <img class="ui avatar image" src="<%= group.user.profile_img_url %>"><%= group.user.full_name %>
+      <div class="right floated author">
+        <img class="ui avatar image" src="<%= group.user.profile_img_url %>"><%= group.user.full_name %>
+      </div>
     </div>
   </div>
-</div>
-</div>
-<% end %>
-
-</div>
+  </div>
+  <% end %>
+  </div>
 </div>

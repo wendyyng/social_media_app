@@ -1,18 +1,12 @@
-
-<section class="bg-image"
-  >
-  
+<section>
   <div class="mask d-flex align-items-center h-100 gradient-custom-3 pb-0">
     <div class="container h-100 pb-0">
       <div class="container row d-flex justify-content-center align-items-center h-100 pb-0">
         <div class="container col-12 col-md-9 col-lg-7 col-xl-6 pb-0">
           <div class="card m-4" style="">
             <div class="card-body px-5 pt-5 ">
-                    
- <%# ----------------------------------------------------%>
                         <div class="container justify-content-center align-items-center d-flex flex-column">
                         <h1 class="m-0"><%= link_to @user.full_name, user_path(@user), style:"text-decoration: none; color: black" %><h1>
-
                           <%   if @user.image.attached? && @user.image.content_type.in?(%w[image/jpeg image/png image/gif])%>
                                   <%= link_to image_tag(@user.image_as_thumbnail), @user.image %>
                                   <% else %>
@@ -20,22 +14,14 @@
                           <img src="<%= @user.profile_img_url %>" style="width: 5em"class="rounded"/>
                             </div>
                           <% end %>
-
-
                         <% if @user != current_user && !@user.friend_with?(current_user) && !Invitation.reacted?(current_user.id, @user.id) %>
                         <div class="d-flex justify-content-center align-items-center">
                           <%= link_to 'Add Friend', invitations_create_path(ids: {id1: current_user.id, id2: @user.id}), method: :post, class:"ui button" %>
                         </div>
                         <% end %>
-
-
                         </div>
                         <div >
                         <div class="container mt-2 d-flex justify-content-center align-items-center flex-column">
-                        
-                        
-                        
-                        
                         <h3>Friends</h3>
                         <div>
                         <% if @user.friends.any? %>
@@ -47,17 +33,13 @@
                                 invitations_destroy_path(invitation_id: Invitation.find_invitation(@user.id, friend.id)), class:"ui button compact mx-2"  %>
                               <% end %>
                               </div>
-                            
-                          <% end %>
-                        
+                          <% end %>                    
                         <% else %>
                         <p>The user has no friends!</p>
                         <% end %>
                         </div>
                           </div>
-
-                          <% if  @user.posts.any?%>
-                          
+                          <% if  @user.posts.any?%>            
                           <hr>
                            <div class="container px-4">
                            <h1 >Posts</h1>
@@ -77,25 +59,17 @@
                                 <div class="extra text">
                                   <%= post.description %>
                                 </div>
-                                
                                   <%   if post.image.attached? %>
-
                                  <div class="images">
                                   <a><%= image_tag(post.image_as_thumbnail) %></a>
                                 </div>
                                 <% end %>
                               </div>
                             </div>
-
-
                            <% end %>
                            </div>
                            </div>
-                          
-                           <% end %>
-<%# ---------------------------------------------------------- %>
-                   
-            
+                           <% end %>                  
             </div>
           </div>
         </div>

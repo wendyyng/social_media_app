@@ -1,7 +1,6 @@
 class AttendingEventsController < ApplicationController
     def new
         @event = Event.find(params[:id])
-
     end
 
     def create
@@ -20,6 +19,5 @@ class AttendingEventsController < ApplicationController
         flash[:notice]= "You have deregistered!!"
         redirect_to event_path(@event)
     end
-
 
 end

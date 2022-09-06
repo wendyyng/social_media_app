@@ -30,42 +30,19 @@
                 <% end %>
               </div>
             </div>
-                
-             
             <% end %>
          </div>
-
-
-
-
-
-
-
-
-
-
-
           <% else %>
-
-
           <div class="my-3">
           <p>You have no friends yet!</p>
           </div>
-
           <% end %>
           </div>
-
-
           <% if @current_user.groups.count > 0 %>
            <div class="card container card shadow p-3 mb-5 bg-white rounded m-4 flex justify-content-center align-items-center" >
           <h1>Your Groups: </h1>
-
-
-
              <div class="ui cards flex justify-content-center align-items-center">
           <% current_user.groups.each do |group |%>
-
-              
             <div class="card" style="min-height: 10em">
               <div class="content">
                 <div class="header">
@@ -75,28 +52,15 @@
                 </div>
               </div>
             </div>
-
-
-
-
-
-
           <% end %>
            </div>
-
-
-
-
            </div>
            <% end %>
-
-
 <% if @upcoming_events.any? %>
  <div class="card container card shadow p-3 mb-5 bg-white rounded m-4 flex justify-content-center align-items-center" >
     <h1>Upcoming Events:</h1>
     <div class="ui cards flex justify-content-center align-items-center">
       <% @upcoming_events.order(date: :asc).each do |event|%>
-
        <div class="card p-1" style="min-height: 10em">
               <div class="content">
                 <div class="header">
@@ -107,7 +71,6 @@
                 </div>
               </div>
           </div>
-
     <% end %>
     </div>
   </div>

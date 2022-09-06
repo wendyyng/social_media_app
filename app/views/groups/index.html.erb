@@ -1,30 +1,19 @@
 <div class="container d-flex flex-wrap justify-content-center align-items-start mt-5">
-
 <% @groups.each do |group| %>
-
-
-
-
-<%# -------------------- %>
 <div class=" m-2  d-flex justify-content-around align-items-left" >
 <div class="ui card" style="width: 20rem; height: 25em">
   <div class="content">
     <h4 class="ui">
   <img src="<%= group.img_url %>" class="ui rounded image">
-
- <p class="text-dark mt-2" ><%= link_to group.title, group_path(group), style:"text-decoration: none; color: black" %></p>
-            
+ <p class="text-dark mt-2" ><%= link_to group.title, group_path(group), style:"text-decoration: none; color: black" %></p>  
 </h4>
     <div class="meta">
-
       <% if group.memberships.count > 0 %>
       <span class="category"><%=group.memberships.count%>  <%= "member".pluralize(group.memberships.count) %> </span>
       <% else %>
          <span class="category">No members yet!</span>
       <% end %>
-
     </div>
- 
   </div>
   <div class="extra content">
 <div class="left floated ">
@@ -36,8 +25,5 @@
   </div>
 </div>
 </div>
-
 <% end %>
-
-
 </div>

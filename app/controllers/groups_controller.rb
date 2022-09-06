@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
-  before_action :find_group, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_user!, only: [:edit, :update, :destroy]
+  before_action :find_group, only: [:show, :edit, :update]
+  before_action :authorize_user!, only: [:edit, :update]
   before_action :authenticate_user!
   
     def index
@@ -8,7 +8,6 @@ class GroupsController < ApplicationController
     end
 
     def show
-        
         @group_post = GroupPost.new
         @comment = Comment.new
         @members = Membership.where(group: @group)

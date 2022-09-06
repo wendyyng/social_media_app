@@ -29,13 +29,6 @@ class PostsController < ApplicationController
         end
     end
 
-    def change_hidden_status
-        @post.update(hidden: !@post.hidden)
-        if @post.update
-            redirect_to user_path(current_user)
-        end
-    end
-
     private
 
     def post_params

@@ -1,7 +1,6 @@
 class LikesController < ApplicationController
     before_action :authenticate_user!
     def create
-
         group_post = GroupPost.find(params[:group_post_id])
         group = group_post.group
             like = Like.new(user:current_user, group_post: group_post)
