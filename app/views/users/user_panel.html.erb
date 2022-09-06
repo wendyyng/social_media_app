@@ -43,7 +43,7 @@
           <h1>Your Groups: </h1>
              <div class="ui cards flex justify-content-center align-items-center">
           <% current_user.groups.each do |group |%>
-            <div class="card" style="min-height: 10em">
+            <div class="card" style="min-height: 12em">
               <div class="content">
                 <div class="header">
                 <p>Group: <%= link_to group.title, group_path(group), style:"text-decoration: none; color: black" %></p></div>
@@ -61,7 +61,7 @@
     <h1>Upcoming Events:</h1>
     <div class="ui cards flex justify-content-center align-items-center">
       <% @upcoming_events.order(date: :asc).each do |event|%>
-       <div class="card p-1" style="min-height: 10em">
+       <div class="card p-1" style="min-height: 12em">
               <div class="content">
                 <div class="header">
                 <p>Event: <%= link_to event.title, event_path(event), style:"text-decoration: none; color: black" %></p></div>
@@ -82,7 +82,7 @@
     <div class="ui cards flex justify-content-center align-items-center">
       <% @organized_events.order(date: :asc).each do |event|%>
 
-       <div class="card p-1" style="min-height: 10em">
+       <div class="card p-1" style="min-height: 12em">
               <div class="content">
                 <div class="header">
                 <p>Event: <%= link_to event.title, event_path(event), style:"text-decoration: none; color: black" %></p></div>
