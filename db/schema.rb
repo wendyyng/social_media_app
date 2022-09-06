@@ -61,12 +61,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_04_233158) do
     t.index ["user_id"], name: "index_attending_events_on_user_id"
   end
 
-  create_table "categories", force: :cascade do |t|
-    t.string "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "comments", force: :cascade do |t|
     t.bigint "group_post_id", null: false
     t.bigint "user_id", null: false
@@ -89,15 +83,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_04_233158) do
     t.float "longitude"
     t.text "img_url", default: "https://images.pexels.com/photos/3719037/pexels-photo-3719037.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     t.index ["organizer_id"], name: "index_events_on_organizer_id"
-  end
-
-  create_table "group_categories", force: :cascade do |t|
-    t.bigint "group_id", null: false
-    t.bigint "category_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_group_categories_on_category_id"
-    t.index ["group_id"], name: "index_group_categories_on_group_id"
   end
 
   create_table "group_posts", force: :cascade do |t|
@@ -154,7 +139,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_04_233158) do
     t.string "title"
     t.text "description"
     t.bigint "user_id", null: false
-    t.boolean "hidden", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_posts_on_user_id"
@@ -169,7 +153,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_04_233158) do
     t.datetime "updated_at", null: false
     t.boolean "is_admin", default: false
     t.text "profile_img_url", default: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-    t.string "address", default: "richmond"
+    t.string "address", default: "calgary"
     t.float "latitude"
     t.float "longitude"
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -182,8 +166,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_04_233158) do
   add_foreign_key "comments", "group_posts"
   add_foreign_key "comments", "users"
   add_foreign_key "events", "users", column: "organizer_id"
-  add_foreign_key "group_categories", "categories"
-  add_foreign_key "group_categories", "groups"
   add_foreign_key "group_posts", "groups"
   add_foreign_key "group_posts", "users"
   add_foreign_key "groups", "users"
