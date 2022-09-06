@@ -27,7 +27,7 @@ FriendMe is a social media platform where users can join groups, register for ev
 - Sign in and sign up as a user
 - View and search for groups based on the title, keywords, location and creator's name
 - Join groups and register for events
-- Make posts with photos and comments after joining a group
+- Make posts with photos, leave comments and like posts after joining a group
 - Create new groups and events
 - Locate group/event location using Google Maps API
 - Distance between user and group/event location
