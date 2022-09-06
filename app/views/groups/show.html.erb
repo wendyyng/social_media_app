@@ -95,7 +95,7 @@
     <%# Comment Section starts%>
         <% if group_post.comments.any? %>
             <h3 class="ui dividing header"></h3>
-             <% group_post.comments.each do |comment|%>
+             <% group_post.comments.order(created_at: :desc).each do |comment|%>
 
             <div class="comment">
                 <a class="avatar">

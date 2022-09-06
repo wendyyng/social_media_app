@@ -2,18 +2,9 @@
     <div class="row">
         <div class="col-8 col-md-8 col-sm-6">
            <%# left starts %>
-           <%# left starts %>
-           <%# left starts %>
-           <%# left starts %>
-           <%# left starts %>
            <div class="card container card shadow p-3 bg-white rounded m-4 flex justify-content-center align-items-center" >
           <h1>Your Friends:</h1>
           <% if current_user.friends.count > 0 %>
-
-
-
-
-
           <div class="ui link cards flex justify-content-center flex-wrap">
             <% current_user.friends.each do |friend| %>
               <div class="card" style="width: 13em">
@@ -75,10 +66,10 @@
           <% current_user.groups.each do |group |%>
 
               
-            <div class="card" >
+            <div class="card" style="min-height: 10em">
               <div class="content">
                 <div class="header">
-                <p><%= link_to group.title, group_path(group), style:"text-decoration: none; color: black" %></p></div>
+                <p>Group: <%= link_to group.title, group_path(group), style:"text-decoration: none; color: black" %></p></div>
                       <div class="description">
                   <%= group.description %>
                 </div>
@@ -100,16 +91,16 @@
            <% end %>
 
 
-<% if @upcoming_events %>
+<% if @upcoming_events.any? %>
  <div class="card container card shadow p-3 mb-5 bg-white rounded m-4 flex justify-content-center align-items-center" >
     <h1>Upcoming Events:</h1>
     <div class="ui cards flex justify-content-center align-items-center">
       <% @upcoming_events.order(date: :asc).each do |event|%>
 
-       <div class="card p-1" style="height: 8em">
+       <div class="card p-1" style="min-height: 10em">
               <div class="content">
                 <div class="header">
-                <p>Meetup: <%= link_to event.title, event_path(event), style:"text-decoration: none; color: black" %></p></div>
+                <p>Event: <%= link_to event.title, event_path(event), style:"text-decoration: none; color: black" %></p></div>
                   <div class="description">
                   <%= event.description %>
                   <h6>Event Date: <%= event.date.strftime("%Y-%m-%d %I:%M") %></h6>
@@ -129,14 +120,14 @@
 
 <% if @organized_events.any? %>
   <div class="card container card shadow p-3 mb-5 bg-white rounded m-4 flex justify-content-center align-items-center" >
-    <h1>Events You Created:</h1>
+    <h1>Events You are Hosting:</h1>
     <div class="ui cards flex justify-content-center align-items-center">
       <% @organized_events.order(date: :asc).each do |event|%>
 
        <div class="card p-1" style="height: 8em">
               <div class="content">
                 <div class="header">
-                <p>Meetup: <%= link_to event.title, event_path(event), style:"text-decoration: none; color: black" %></p></div>
+                <p>Event: <%= link_to event.title, event_path(event), style:"text-decoration: none; color: black" %></p></div>
                   <div class="description">
                   <%= event.description %>
                   <h6>Event Date: <%= event.date.strftime("%Y-%m-%d %I:%M") %></h6>
@@ -190,7 +181,7 @@
                               </button>
                            
                             <button class="primary basic button ui" style="width: 12em">
-                                <%= link_to 'Create Meetup', new_event_path %>
+                                <%= link_to 'Create Event', new_event_path %>
                               </button>
                           
              
@@ -256,7 +247,9 @@
           <div class="card">
             <div class="content">
             <img class="right floated mini ui image" src="<%= User.find(invitation.friend_id).profile_img_url %>">
-              <div class="header"><%= User.find(invitation.friend_id).full_name %></div>
+              <div class="header">
+              <%= link_to User.find(invitation.friend_id).full_name, user_path(User.find(invitation.friend_id)), style:"text-decoration: none; color: black" %>
+              </div>
               <div class="description">
               Sent
                 <%= time_ago_in_words(invitation.created_at)  %>  ago

@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
     before_action :authenticate_user!, only: [:index, :show, :edit, :update, :user_panel]
     before_action :authorize_user!, only: [:edit]
+    
     def index
         @users = User.all.order(created_at: :desc)
     end
@@ -10,7 +11,7 @@ class UsersController < ApplicationController
     end
 
     def create
-        @user = User.new params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :image)
+        @user = User.new params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :image, :address, :profile_img_url)
 
         if @user.save
             session[:user_id] = @user.id

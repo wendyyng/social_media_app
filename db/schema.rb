@@ -153,7 +153,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_04_233158) do
     t.datetime "updated_at", null: false
     t.boolean "is_admin", default: false
     t.text "profile_img_url", default: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-    t.string "address", default: "calgary"
+    t.string "address", default: "1895 Lower Mall, Vancouver, BC V6T 1Z4"
     t.float "latitude"
     t.float "longitude"
     t.index ["email"], name: "index_users_on_email", unique: true

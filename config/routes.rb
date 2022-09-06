@@ -30,8 +30,8 @@ Rails.application.routes.draw do
   delete '/users/:user_id/events/:id', to: "attending_events#destroy", as: "destroy_attending_event"
 
 
+  get 'invitations/create' => 'invitations#create'
   get 'invitations/update'
-  get 'invitations/create'
   get 'invitations/destroy'
   get 'invitations/destroy_from_panel'
   get 'invitations/unsent'

@@ -23,6 +23,10 @@ class Ability
         user == c.user
       end
 
+      can :crud, Event do |e|
+        user == e.user
+      end
+
       can(:destroy, Like) do |like|
         like.user == user
       end

@@ -7,12 +7,12 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 
-Rails.application.eager_load!
-ActiveRecord::Base.connection.disable_referential_integrity do
-  ApplicationRecord.descendants.each do |model|
-    model.delete_all
-  end
-end
+# Rails.application.eager_load!
+# ActiveRecord::Base.connection.disable_referential_integrity do
+#   ApplicationRecord.descendants.each do |model|
+#     model.delete_all
+#   end
+# end
 
 
 AttendingEvent.destroy_all
@@ -35,7 +35,8 @@ super_user = User.create(
   email: "admin@user.com",
   password: PASSWORD,
   is_admin: true,
-  profile_img_url: 'https://images.pexels.com/photos/9180717/pexels-photo-9180717.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+  address: "650 W 41st Ave, Vancouver, BC V5Z 2M9",
+  profile_img_url: 'https://img.freepik.com/free-vector/admin-concept-illustration_114360-2139.jpg?w=740&t=st=1662484977~exp=1662485577~hmac=81a3727444cb91d0d083ef24892b5f1ca93df0112901dd3657c6eeae535eb80e'
 )
 
 FEMALE_USER_IMAGES = [
@@ -88,13 +89,16 @@ MALE_USER_IMAGES = [
 20.times do |n|
     first_name = Faker::Name.female_first_name
     last_name = Faker::Name.last_name
+    created_at = Faker::Date.backward(days: 365)
     u = User.create(
       first_name: first_name,
       last_name: last_name,
       email: "#{first_name}@#{last_name}.com",
       password: PASSWORD,
       profile_img_url: FEMALE_USER_IMAGES[n],
-      address: Faker::Address.city
+      address: Faker::Address.city,
+      created_at: created_at,
+      updated_at: created_at,
     )
 
     if u.valid?
@@ -111,20 +115,26 @@ end
 20.times do |n|
     first_name = Faker::Name.male_first_name
     last_name = Faker::Name.last_name
+    created_at = Faker::Date.backward(days: 365)
     u = User.create(
       first_name: first_name,
       last_name: last_name,
       email: "#{first_name}@#{last_name}.com",
       password: PASSWORD,
       profile_img_url: MALE_USER_IMAGES[n],
-      address: Faker::Address.city
+      address: Faker::Address.city,
+      created_at: created_at,
+      updated_at: created_at,
      )
 
       rand(1..5).times do
+        created_at = Faker::Date.backward(days: 180)
         Post.create(
           title: Faker::Hipster.sentence,
           description: Faker::Hipster.sentence,
-          user: u
+          user_id: u.id,
+          created_at: created_at,
+          updated_at: created_at
         )
      end
 end
@@ -189,25 +199,27 @@ GROUP_IMAGES = [
 
 22.times do |i|
     created_at = Faker::Date.backward(days: 3)
-
+    u = users.sample
     g = Group.create(
         title: GROUP_NAMES[i],
         description: Faker::Hipster.sentence,
-        user: users.sample,
+        user: u,
         img_url: GROUP_IMAGES[i],
         address: "vancouver"
       )
 
     if g.valid?
-      Membership.create(user:super_user, group: g)
+      Membership.create(user:u, group: g)
         rand(1..5).times do
-          u = users.sample
-          Membership.create(user:u, group: g)
-          gp = GroupPost.create(body: Faker::Hipster.sentence, user: u, group: g)
+          member = users.sample
+          Membership.create(user:member, group: g)
+          created_at = Faker::Date.backward(days: 180)
+          gp = GroupPost.create(body: Faker::Hipster.sentence, user: u, group: g, created_at: created_at, updated_at: created_at)
           if gp.valid?
             gp.likers = users.shuffle.slice(0, rand(users.count))
             rand(1..5).times do
-                Comment.create(body: Faker::Hipster.sentence, user: users.sample, group_post: gp)
+              created_at = Faker::Date.backward(days: 180)
+                Comment.create(body: Faker::Hipster.sentence, user: users.sample, group_post: gp, created_at: created_at, updated_at: created_at)
             end
           end
 
@@ -276,7 +288,7 @@ EVENT_IMAGES = [
   e = Event.create(
       title: EVENT_NAMES[i],
       description: Faker::Hipster.sentence,
-      location: Faker::Address.city,
+      location: "601 W Cordova St, Vancouver, BC V6B 1G1",
       date: Faker::Date.forward(days: 90),
       organizer_id: u.id,
       img_url: EVENT_IMAGES[i],
@@ -285,10 +297,13 @@ EVENT_IMAGES = [
   if e.valid?
     e.attendees << u
       rand(1..5).times do
-        AttendingEvent.create(
-          user_id: users.sample.id,
-          event_id: e.id
-        )
+        a = users.sample
+        if a != u
+          AttendingEvent.create(
+            user_id: a.id,
+            event_id: e.id
+          )
+        end
       end
   end
 end
@@ -296,20 +311,4 @@ end
 events = Event.all
 attending_events = AttendingEvent.all
 
-p "created #{groups.count} groups, 
-#{group_posts.count} group posts, 
-#{likes.count} likes, 
-#{comments.count} comments, 
-#{memberships.count} memberships,
-#{users.count} users,
-#{posts.count} posts,
-#{events.count} events,
-#{attending_events.count} attending events
-"
-
-groups = Group.all
-group_posts = GroupPost.all
-likes = Like.all
-comments = Comment.all
-memberships = Membership.all
-users
+p "created #{groups.count} groups, #{group_posts.count} group posts, #{likes.count} likes, #{comments.count} comments, #{memberships.count} memberships, #{users.count} users, #{posts.count} posts, #{events.count} events, #{attending_events.count} attending events"
