@@ -76,18 +76,13 @@
   </div>
 <% end %>
 
-
-
-
-
-
 <% if @organized_events.any? %>
   <div class="card container card shadow p-3 mb-5 bg-white rounded m-4 flex justify-content-center align-items-center" >
     <h1>Events You are Hosting:</h1>
     <div class="ui cards flex justify-content-center align-items-center">
       <% @organized_events.order(date: :asc).each do |event|%>
 
-       <div class="card p-1" style="height: 8em">
+       <div class="card p-1" style="min-height: 10em">
               <div class="content">
                 <div class="header">
                 <p>Event: <%= link_to event.title, event_path(event), style:"text-decoration: none; color: black" %></p></div>
@@ -102,21 +97,13 @@
     </div>
   </div>
 <% end %>
-
-
             <%# left ends %>
         </div>
         <div class="col-4 col-md-4 col-sm-6">
            <%# right starts %>
-           <%# right starts %>
-           <%# right starts %>
-           <%# right starts %>
-           <%# right starts %>
-
           <div class="card container card shadow p-3 mb-5 bg-white rounded m-4" >
            <div class="container d-flex justify-content-center align-items-center flex-column">
                         <h1><%= link_to current_user.first_name, user_path(current_user), style:"text-decoration: none; color: black" %><h1>
-
                           <%   if current_user.image.attached? && current_user.image.content_type.in?(%w[image/jpeg image/png image/gif])%>
                                   <%= link_to image_tag(current_user.image_as_thumbnail), current_user.image %>
                                   <% else %>
@@ -145,26 +132,13 @@
                            
                             <button class="primary basic button ui" style="width: 12em">
                                 <%= link_to 'Create Event', new_event_path %>
-                              </button>
-                          
-             
+                              </button>        
           </div>
           </div>
-
-
-
-
-
-
-
-
             <% if @received_requests.count > 0 %>
            <div class="card container card shadow p-3 mb-5 bg-white rounded m-4 flex justify-content-center align-items-center" >
-          <h1>New friend requests:</h1>
-          
+          <h1>New friend requests:</h1>        
             <% @received_requests.each do |invitation| %>
-
-
                 <div class="ui cards">
                <div class="card">
                 <div class="content">
@@ -193,17 +167,9 @@
             </div>
             <% end %>
 
-
-
 <% if @sent_requests.where(confirmed: false).count > 0 %>
     <div class="card container card shadow p-3 mb-5 bg-white rounded m-4 flex justify-content-center align-items-center" >
           <h1>Request Pending:</h1>
-
-
-
-
-
-
 
           <div class="ui cards flex justify-content-center ">
           <% @sent_requests.where(confirmed: false).each do |invitation|%>
@@ -226,15 +192,6 @@
               </div>
             </div>
             <% end %>
-
-
-
-
-
-            <%# right ends %>
-            <%# right ends %>
-            <%# right ends %>
-            <%# right ends %>
             <%# right ends %>
         </div>
     </div>

@@ -1,6 +1,5 @@
 class GroupsController < ApplicationController
   before_action :find_group, only: [:show, :edit, :update]
-  before_action :authorize_user!, only: [:edit, :update]
   before_action :authenticate_user!
   
     def index
@@ -11,12 +10,10 @@ class GroupsController < ApplicationController
         @group_post = GroupPost.new
         @comment = Comment.new
         @members = Membership.where(group: @group)
+        @membership = current_user.memberships.find_by(group: @group) 
         @comment.group_post = @group_post
         @group_posts = @group.group_posts.order(created_at: :desc)
         @distance = group_user_distance_km(@group, current_user)
-        if current_user
-          @membership = current_user.memberships.find_by(group: @group) 
-        end
     end
 
     def new
