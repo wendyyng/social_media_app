@@ -6,14 +6,10 @@
           <div class="card m-4" style="">
             <div class="card-body px-5 pt-5 ">
                         <div class="container justify-content-center align-items-center d-flex flex-column">
-                        <h1 class="m-0"><%= link_to @user.full_name, user_path(@user), style:"text-decoration: none; color: black" %><h1>
-                          <%   if @user.image.attached? && @user.image.content_type.in?(%w[image/jpeg image/png image/gif])%>
-                                  <%= link_to image_tag(@user.image_as_thumbnail), @user.image %>
-                                  <% else %>
+                        <h1 class="m-0"><%= link_to @user.full_name, user_path(@user), style:"text-decoration: none; color: black" %><h1>               
                           <div class="image mb-3 ">
                           <img src="<%= @user.profile_img_url %>" style="width: 5em"class="rounded"/>
                             </div>
-                          <% end %>
                         <% if @user != current_user && !@user.friend_with?(current_user) && !Invitation.reacted?(current_user.id, @user.id) %>
                         <div class="d-flex justify-content-center align-items-center">
                           <%= link_to 'Add Friend', invitations_create_path(ids: {id1: current_user.id, id2: @user.id}), method: :post, class:"ui button" %>

@@ -1,3 +1,5 @@
+require 'action_text'
+
 class ApplicationController < ActionController::Base
     before_action :set_query
 
