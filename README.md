@@ -1,4 +1,4 @@
-# FriendMe
+# Social Media App - FriendMe
 
 ## Table of Contents
 - Summary
@@ -19,7 +19,6 @@ FriendMe is a social media platform where users can join groups, register for ev
 - HTML
 - CSS
 - Javascript
-- JQuery
 - Google Maps API
 
 ## Features
@@ -41,6 +40,8 @@ FriendMe is a social media platform where users can join groups, register for ev
 ![image](https://user-images.githubusercontent.com/71687298/188759181-74097d81-816a-40b0-8e8e-69fd80246a6e.png)
 - Group Index Page:
 ![image](https://user-images.githubusercontent.com/71687298/188759212-33bc2795-ddd4-4f56-8821-cae5e42323ce.png)
+- Group Search Result:
+![image](https://user-images.githubusercontent.com/71687298/188762985-fc31f326-3eca-47cf-bbc1-ff736c4ef9b2.png)
 - Group Show Page before Joining:
 ![image](https://user-images.githubusercontent.com/71687298/188759237-4de27757-e119-4630-8ce3-2f9828104358.png)
 - Group Show Page after Joining:
