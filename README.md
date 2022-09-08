@@ -20,6 +20,7 @@ FriendMe is a social media platform where users can join groups, register for ev
 - CSS
 - Javascript
 - Google Maps API
+- PostgreSQL
 
 ## Features
 
