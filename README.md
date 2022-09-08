@@ -3,7 +3,7 @@
 ## Table of Contents
 - Summary
 - Heroku Link
-- Techgnologies Used
+- Technologies Used
 - Features
 - Screenshots
 - Installation
