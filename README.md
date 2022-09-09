@@ -12,8 +12,8 @@
 FriendMe is a social media platform where users can join groups, register for events and make friends with other users. 
 
 ## Demo Links
-# Heroku: https://friendme-app.herokuapp.com/
-# Youtube: https://youtu.be/fWhx7bt9fR0
+### Heroku: https://friendme-app.herokuapp.com/
+### Youtube: https://youtu.be/fWhx7bt9fR0
 
 ## Technologies Used:
 
@@ -68,6 +68,7 @@ FriendMe is a social media platform where users can join groups, register for ev
 
 - git clone URL
 - cd into project
+- Run bundle
 - Run rails db:create
 - Run rails db:migrate
 - Run rails db:seed
