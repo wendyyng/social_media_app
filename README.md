@@ -2,7 +2,7 @@
 
 ## Table of Contents
 - Summary
-- Heroku Link
+- Demo Link
 - Technologies Used
 - Features
 - Screenshots
