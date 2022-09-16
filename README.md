@@ -13,6 +13,7 @@ FriendMe is a social media platform where users can join groups, register for ev
 
 ## Links
 ### Heroku: https://friendme-app.herokuapp.com/
+- Sign in as Guest (email: guest@user.com, password: 123)
 ### Youtube: https://youtu.be/fWhx7bt9fR0
 
 ## Technologies Used:
