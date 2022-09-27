@@ -39,9 +39,9 @@ FriendMe is a social media platform where users can join groups, register for ev
 - Distance between user and group/event location
 - Create personal posts with photos on the profile page
 - Send and unsend friend requests
-- Unsend and decline friend requests
-- User panel with the 
--- user's group, event and friend lists
+- Accept and decline friend requests
+- User panel includes:
+ - List of joined groups
 
 ## Screenshots: 
 
