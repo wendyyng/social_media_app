@@ -38,10 +38,15 @@ FriendMe is a social media platform where users can join groups, register for ev
 - Locate group/event location using Google Maps API
 - Distance between user and group/event location
 - Create personal posts with photos on the profile page
+- Update profile info
 - Send and unsend friend requests
 - Accept and decline friend requests
-- User panel includes:
-    - List of joined groups
+- User panel includes lists of:
+    - User's friends
+    - Received and pending friend requests
+    - User's groups
+    - Upcoming events
+    - Events hosted by the user
 
 ## Screenshots: 
 
