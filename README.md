@@ -41,7 +41,7 @@ FriendMe is a social media platform where users can join groups, register for ev
 - Send and unsend friend requests
 - Accept and decline friend requests
 - User panel includes:
- - List of joined groups
+    - List of joined groups
 
 ## Screenshots: 
 
