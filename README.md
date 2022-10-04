@@ -1,5 +1,5 @@
 # Social Media App - FriendMe
-
+![image](https://user-images.githubusercontent.com/71687298/188759181-74097d81-816a-40b0-8e8e-69fd80246a6e.png)
 ## Table of Contents
 - Summary
 - Demo Link
@@ -49,9 +49,6 @@ FriendMe is a social media platform where users can join groups, register for ev
     - Events hosted by the user
 
 ## Screenshots: 
-
-- Home Page:
-![image](https://user-images.githubusercontent.com/71687298/188759181-74097d81-816a-40b0-8e8e-69fd80246a6e.png)
 - Group Index Page:
 ![image](https://user-images.githubusercontent.com/71687298/188759212-33bc2795-ddd4-4f56-8821-cae5e42323ce.png)
 - Group Search Result:
