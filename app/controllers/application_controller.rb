@@ -1,6 +1,7 @@
 require 'action_text'
 
 class ApplicationController < ActionController::Base
+    helper ActionText::Engine.helpers
     before_action :set_query
 
     def set_query
