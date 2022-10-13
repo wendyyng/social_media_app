@@ -1,9 +1,9 @@
 # Social Media App - FriendMe
-
+![image](https://user-images.githubusercontent.com/71687298/188759181-74097d81-816a-40b0-8e8e-69fd80246a6e.png)
 ## Table of Contents
 - Summary
-- Heroku Link
-- Techgnologies Used
+- Demo Link
+- Technologies Used
 - Features
 - Screenshots
 - Installation
@@ -11,8 +11,10 @@
 ## Summary
 FriendMe is a social media platform where users can join groups, register for events and make friends with other users. 
 
-## Heroku Link
-https://friendme-app.herokuapp.com/
+## Links
+### Heroku: https://friendme-app.herokuapp.com/
+- Sign in as Guest (email: guest@user.com, password: 123)
+### Youtube: https://www.youtube.com/watch?v=XcQoe7GQQP4
 
 ## Technologies Used:
 
@@ -35,14 +37,18 @@ https://friendme-app.herokuapp.com/
 - Create new groups and events
 - Locate group/event location using Google Maps API
 - Distance between user and group/event location
-- Create personal posts with photos on profile page
-- Send and receive friend requests
-- Unsend and decline friend requests
+- Create personal posts with photos on the profile page
+- Update profile info
+- Send and unsend friend requests
+- Accept and decline friend requests
+- User panel includes lists of:
+    - User's friends
+    - Received and pending friend requests
+    - User's groups
+    - Upcoming events
+    - Events hosted by the user
 
 ## Screenshots: 
-
-- Home Page:
-![image](https://user-images.githubusercontent.com/71687298/188759181-74097d81-816a-40b0-8e8e-69fd80246a6e.png)
 - Group Index Page:
 ![image](https://user-images.githubusercontent.com/71687298/188759212-33bc2795-ddd4-4f56-8821-cae5e42323ce.png)
 - Group Search Result:
@@ -67,6 +73,7 @@ https://friendme-app.herokuapp.com/
 
 - git clone URL
 - cd into project
+- Run bundle
 - Run rails db:create
 - Run rails db:migrate
 - Run rails db:seed
