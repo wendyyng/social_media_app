@@ -41,17 +41,30 @@
           <% if @current_user.groups.count > 0 %>
            <div class="card container card shadow p-3 mb-5 bg-white rounded m-4 flex justify-content-center align-items-center" >
           <h1>Your Groups: </h1>
-             <div class="ui cards flex justify-content-center align-items-center">
+             <div class="ui large feed flex justify-content-center align-items-center">
+             <%# <div class="ui large feed"> %>
           <% current_user.groups.each do |group |%>
-            <div class="card" style="min-height: 12em">
-              <div class="content">
-                <div class="header">
-                <p>Group: <%= link_to group.title, group_path(group), style:"text-decoration: none; color: black" %></p></div>
-                      <div class="description">
-                  <%= group.description %>
-                </div>
-              </div>
-            </div>
+            <div class="event card m-2" style="width: 40em">
+    <div class=" p-2 ui small right spaced image rounded">
+      <img src="<%= group.img_url %>">
+    </div>
+    <div class="content">
+      <div class="summary">
+        <a class="user">
+          <%= link_to group.title, group_path(group), style:"text-decoration: none; color: black" %>
+        </a>
+      </div>
+        <div class="description">
+          <%= group.description %>
+        </div>
+      <div class="meta">
+        <a class="">
+          <i class="users icon"></i> <%= group.memberships.count %> Members
+        </a>
+      </div>
+    </div>
+  </div>
+        
           <% end %>
            </div>
            </div>
@@ -59,40 +72,62 @@
 <% if @upcoming_events.any? %>
  <div class="card container card shadow p-3 mb-5 bg-white rounded m-4 flex justify-content-center align-items-center" >
     <h1>Upcoming Events:</h1>
-    <div class="ui cards flex justify-content-center align-items-center">
+    <div class="ui large feed flex justify-content-center align-items-center" style="width: 40em">
       <% @upcoming_events.order(date: :asc).each do |event|%>
-       <div class="card p-1" style="min-height: 12em">
-              <div class="content">
-                <div class="header">
-                <p>Event: <%= link_to event.title, event_path(event), style:"text-decoration: none; color: black" %></p></div>
-                  <div class="description">
-                  <%= event.description %>
-                  <h6>Event Date: <%= event.date.strftime("%Y-%m-%d %I:%M") %></h6>
-                </div>
-              </div>
-          </div>
+      
+
+      <div class="event card m-2">
+    <div class=" p-2 ui small right spaced image rounded">
+      <img src="<%= event.img_url %>">
+    </div>
+    <div class="content">
+      <div class="summary">
+        <a class="user">
+          <%= link_to event.title, event_path(event), style:"text-decoration: none; color: black" %>
+        </a>
+      </div>
+        <div class="description">
+          <%= event.description %>
+        </div>
+      <div class="meta">
+        <a class="">
+          <i class="calendar alternate outline icon"></i> Event Date: <%= event.date.strftime("%Y-%m-%d %I:%M") %>
+        </a>
+      </div>
+    </div>
+  </div>
     <% end %>
     </div>
   </div>
 <% end %>
 
 <% if @organized_events.any? %>
-  <div class="card container card shadow p-3 mb-5 bg-white rounded m-4 flex justify-content-center align-items-center" >
-    <h1>Events You are Hosting:</h1>
-    <div class="ui cards flex justify-content-center align-items-center">
+ <div class="card container card shadow p-3 mb-5 bg-white rounded m-4 flex justify-content-center align-items-center" >
+    <h1>Events You are Organizing:</h1>
+    <div class="ui large feed flex justify-content-center align-items-center" style="width: 40em">
       <% @organized_events.order(date: :asc).each do |event|%>
+      
 
-       <div class="card p-1" style="min-height: 12em">
-              <div class="content">
-                <div class="header">
-                <p>Event: <%= link_to event.title, event_path(event), style:"text-decoration: none; color: black" %></p></div>
-                  <div class="description">
-                  <%= event.description %>
-                  <h6>Event Date: <%= event.date.strftime("%Y-%m-%d %I:%M") %></h6>
-                </div>
-              </div>
-          </div>
-
+      <div class="event card m-2">
+    <div class=" p-2 ui small right spaced image rounded">
+      <img src="<%= event.img_url %>">
+    </div>
+    <div class="content">
+      <div class="summary">
+        <a class="user">
+          <%= link_to event.title, event_path(event), style:"text-decoration: none; color: black" %>
+        </a>
+      </div>
+        <div class="description">
+          <%= event.description %>
+        </div>
+      <div class="meta">
+        <a class="">
+          <i class="calendar alternate outline icon"></i> Event Date: <%= event.date.strftime("%Y-%m-%d %I:%M") %>
+        </a>
+      </div>
+    </div>
+  </div>
     <% end %>
     </div>
   </div>
@@ -169,7 +204,7 @@
 
 <% if @sent_requests.where(confirmed: false).count > 0 %>
     <div class="card container card shadow p-3 mb-5 bg-white rounded m-4 flex justify-content-center align-items-center" >
-          <h1>Request Pending:</h1>
+          <h1>Sent Friend Requests:</h1>
 
           <div class="ui cards flex justify-content-center ">
           <% @sent_requests.where(confirmed: false).each do |invitation|%>
