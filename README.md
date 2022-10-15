@@ -60,11 +60,11 @@ FriendMe is a social media platform where users can join groups, register for ev
 - Event Index Page:
 ![image](https://user-images.githubusercontent.com/71687298/188759310-6c506a1f-4a6f-4c37-9926-6cf02db4ae1e.png)
 - Event Show Page:
-![image](https://user-images.githubusercontent.com/71687298/188759405-a09990bb-a683-43f6-ae73-4a145fc5d7d1.png)
+![image](https://user-images.githubusercontent.com/71687298/195967458-d22d8114-8195-44bf-a109-23399c45e5dc.png)
 - User Index Page:
 ![image](https://user-images.githubusercontent.com/71687298/188759807-9755a8b0-8b4d-4588-8abf-8830ee5a1fbe.png)
 - User Panel:
-![image](https://user-images.githubusercontent.com/71687298/188759357-1d130bec-5581-4c09-9069-3fc0266ae518.png)
+![image](https://user-images.githubusercontent.com/71687298/195967464-8b664482-addb-4961-9403-4341bd3d9c2e.png)
 - User Profile Page:
 ![image](https://user-images.githubusercontent.com/71687298/188759327-36973209-1aec-4d6c-b4bf-c8689495974c.png)
 
