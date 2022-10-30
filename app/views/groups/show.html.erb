@@ -130,10 +130,10 @@
         <%# --------group info ends ----------%>
         <%# --------map starts----------%>
         <% if @group.longitude && current_user.longitude %>
-        <div class="card container card shadow p-3 mb-5 bg-white rounded m-4 justify-content-center align-items-center" >
+        <div class="card container card shadow p-3 mb-5 bg-white rounded m-4 r" >
             <h1>Location</h1>
             <p><%= number_with_delimiter(@distance, :delimiter => ',') %> km away from your current location</p>
-            <div >
+            <div class="d-flex justify-content-center">
             <div id="map" style='width: 18em; height: 12em;'></div>
             </div>
         </div>
@@ -144,7 +144,7 @@
         <%# --------members start ----------%>
         <div class="card container card shadow p-3 mb-5 bg-white rounded m-4" >
 
-            <h1>Members:</h1>
+            <h1>Members</h1>
             <% if @members.present? %>
                 <div class="ui comments">
                 <% @members.each do |member| %>
