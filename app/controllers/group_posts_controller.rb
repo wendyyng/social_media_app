@@ -10,7 +10,7 @@ class GroupPostsController < ApplicationController
         @group_post.user = current_user
         @group_post.group = @group
         if @group_post.save
-            flash[:notice]= "Group created successfully!" 
+            flash[:notice]= "Group post created successfully!" 
         else
             @group_posts = @group.group_posts.order(created_at: :desc)
             flash[:error] = "Invalid Group Post"

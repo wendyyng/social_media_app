@@ -119,7 +119,7 @@ footer {
       </div>
       <div class="d-flex flex-row-reverse">
     <% flash.each do |type, message| %>
-      <div class="ui floating message alert alert-success alert-dismissible" role="alert">
+      <div class="ui floating message alert alert-success alert-dismissible" id="flash" role="alert">
       <i class="bell icon"></i>
        <%= type.capitalize() + ": " + message %> 
       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -131,5 +131,12 @@ footer {
 
      <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+      setTimeout(function(){
+      $('#flash').fadeOut();
+     }, 1500);
+     })
+    </script>
   </body>
 </html>
