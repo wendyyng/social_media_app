@@ -11,7 +11,8 @@
 ## Summary
 FriendMe is a social media platform where users can join groups, register for events and make friends with other users. 
 
-## Link
+## Links
+### Live: https://friendme-app.herokuapp.com/
 ### Youtube: https://www.youtube.com/watch?v=XcQoe7GQQP4
 
 ## Technologies Used:
