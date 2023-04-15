@@ -185,8 +185,6 @@ GEM
     strscan (3.0.4)
     thor (1.2.1)
     timeout (0.3.0)
-    toastr-rails (1.0.3)
-      railties (>= 3.1.0)
     turbo-rails (1.1.1)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
@@ -225,7 +223,6 @@ DEPENDENCIES
   simple_form
   sprockets-rails
   stimulus-rails
-  toastr-rails
   turbo-rails
   tzinfo-data
   underscore-rails (~> 1.8, >= 1.8.3)
