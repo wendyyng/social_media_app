@@ -1,9 +1,9 @@
 <%= form_with(model:[@group, @group_post]) do |f| %>
     <div class="form-group">
     <%= f.label :body %>
-    <br></br>
+    <br>
     <%= f.text_field :body, class:"form-control" %>
-    <br></br>
+    <br>
     </div>
     <%= f.submit "Post", class:"ui primary button" %>
 <% end %>

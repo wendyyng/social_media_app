@@ -33,9 +33,7 @@
         </div>
         </div>
         <div><%= group_post.body %></div>
-        <%   if group_post.image.attached? && group_post.image.content_type.in?(%w[image/jpeg image/png image/gif])%>
-             <%= link_to image_tag(group_post.image_as_thumbnail), group_post.image %>
-        <% end %>
+
        <br>
         <small>
         <% like = group_post.likes.find_by(user: current_user) %>
